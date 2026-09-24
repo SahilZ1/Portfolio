@@ -1,0 +1,145 @@
+/**
+ * Design tokens.
+ *
+ * Colour discipline for a yellow-and-white brand
+ * ----------------------------------------------
+ * Yellow at full saturation is the worst possible text colour on white:
+ * #FFC800 on #FFFFFF is about 1.5:1, far below the 4.5:1 that WCAG AA asks for
+ * body text. So yellow is used here strictly as a *surface, edge and mark*
+ * colour, never as a text colour on light ground:
+ *
+ *   - yellow FILL with near-black text on top   -> 12.6:1, excellent
+ *   - yellow BORDER, underline, bar, dot, glow  -> decorative, not load-bearing
+ *   - yellow TEXT only on charcoal/black        -> 10.9:1 on #101114
+ *
+ * Where a yellow-toned label is needed on white, `--brand-text` is used, a
+ * deepened amber that clears 4.5:1 while still reading as the brand colour.
+ *
+ * Every colour pairing in this file has been chosen against that rule.
+ */
+
+:root {
+  /* ---- Brand ---- */
+  --brand: #ffc800;          /* primary yellow: fills, borders, marks */
+  --brand-hover: #f0b800;
+  --brand-soft: #fff4cc;     /* tinted surface */
+  --brand-softer: #fffaeb;
+  --brand-text: #8a6200;     /* 5.6:1 on white — the only yellow-family text colour on light ground */
+  --brand-on: #16120a;       /* text placed on top of --brand — 12.6:1 */
+
+  /* ---- Neutrals (light / public site) ---- */
+  --ink: #101114;            /* headings, primary text — 18.5:1 on white */
+  --ink-2: #33363d;          /* secondary text — 10.4:1 */
+  --muted: #5f636c;          /* tertiary text — 6.4:1, still AA for body */
+  --faint: #8b9099;          /* decorative labels only, never body copy */
+  --paper: #ffffff;
+  --paper-2: #faf9f6;        /* warm off-white section ground */
+  --paper-3: #f4f2ed;
+  --line: #e7e4dc;
+  --line-strong: #d3cfc4;
+
+  /* ---- Console (dark / admin dashboard) ---- */
+  --c-bg: #0d0e11;
+  --c-surface: #15171c;
+  --c-surface-2: #1b1e25;
+  --c-line: #262a33;
+  --c-line-strong: #343945;
+  --c-text: #e9ebef;
+  --c-muted: #949aa6;
+  --c-faint: #6b717d;
+
+  /* ---- Status ---- */
+  --positive: #1f8a4c;
+  --positive-dim: #e7f5ec;
+  --attention: #b4520a;
+  --attention-dim: #fdf0e5;
+  --negative: #b3261e;
+  --c-positive: #4ade80;
+  --c-attention: #fbbf24;
+  --c-negative: #f87171;
+
+  /* ---- Typography ----
+     A system stack rather than a web font: it renders instantly with no
+     network request, no layout shift, and no font-src exception in the CSP.
+     The premium feel comes from the scale and tracking below, not from the
+     typeface licence. */
+  --font-sans: "Segoe UI Variable Display", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Cascadia Code", "Consolas",
+    "Liberation Mono", Menlo, monospace;
+
+  /* Fluid type scale. clamp() means no breakpoint jumps between sizes. */
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.84rem);
+  --step-0: clamp(0.95rem, 0.92rem + 0.15vw, 1.05rem);
+  --step-1: clamp(1.12rem, 1.05rem + 0.35vw, 1.35rem);
+  --step-2: clamp(1.4rem, 1.25rem + 0.7vw, 1.9rem);
+  --step-3: clamp(1.8rem, 1.5rem + 1.4vw, 2.75rem);
+  --step-4: clamp(2.3rem, 1.7rem + 2.6vw, 4rem);
+  --step-5: clamp(3rem, 1.8rem + 5.4vw, 7rem);
+
+  /* ---- Space ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  /* ---- Shape ---- */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* ---- Elevation ----
+     Restrained: two soft layers rather than one heavy drop shadow, which is
+     what separates a premium surface from a Bootstrap card. */
+  --shadow-1: 0 1px 2px rgba(16, 17, 20, 0.04), 0 2px 8px rgba(16, 17, 20, 0.04);
+  --shadow-2: 0 2px 4px rgba(16, 17, 20, 0.05), 0 12px 28px rgba(16, 17, 20, 0.08);
+  --shadow-brand: 0 8px 28px rgba(255, 200, 0, 0.28);
+
+  /* ---- Motion ----
+     One easing curve used everywhere. Consistency in timing is most of what
+     makes interface motion feel designed rather than assembled. */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 140ms;
+  --dur: 240ms;
+  --dur-slow: 480ms;
+
+  /* ---- Layout ---- */
+  --page-max: 1180px;
+  --page-wide: 1360px;
+  --gutter: clamp(1.15rem, 4vw, 3rem);
+  --nav-height: 68px;
+}
+
+/**
+ * Reduced motion.
+ *
+ * Durations collapse to near-zero rather than to exactly zero, so transitions
+ * still fire their completion events and any state that depends on them stays
+ * correct. Components additionally read the preference in JavaScript (see
+ * lib/motion.js) to skip transform-based entrances entirely, because an
+ * instant-but-still-moving element is not what the preference asks for.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur: 1ms;
+    --dur-slow: 1ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

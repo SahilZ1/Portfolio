@@ -1,0 +1,79 @@
+# --- Secrets -------------------------------------------------------------
+# .env holds database credentials and the session secret. It must never be
+# committed. .env.example carries the same keys with placeholder values and IS
+# committed.
+.env
+.env.*
+!.env.example
+
+# Anything that looks like a key or certificate.
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+secrets.json
+credentials.json
+
+
+# --- Dependencies --------------------------------------------------------
+node_modules/
+.pnp
+.pnp.js
+
+
+# --- Build output --------------------------------------------------------
+client/dist/
+dist/
+build/
+.vite/
+
+
+# --- Logs ----------------------------------------------------------------
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# --- Test and coverage ---------------------------------------------------
+coverage/
+.nyc_output/
+*.lcov
+
+
+# --- Database dumps ------------------------------------------------------
+# A dump of the analytics database contains visitor identifiers and the admin
+# password hash. Keep them out of version control.
+*.sql.gz
+*.dump
+*.backup
+pgdata/
+
+
+# --- Editors and OS ------------------------------------------------------
+.vscode/*
+!.vscode/launch.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# --- Runtime -------------------------------------------------------------
+*.pid
+*.seed
+.cache/
+tmp/
+temp/
+
+
+# --- Deployment ----------------------------------------------------------
+.vercel
+.netlify

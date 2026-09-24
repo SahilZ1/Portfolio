@@ -1,0 +1,50 @@
+{
+  "name": "sahil-zagade-portfolio",
+  "version": "1.0.0",
+  "description": "Personal cybersecurity portfolio with a first-party analytics platform: Express API, PostgreSQL, anonymous visitor tracking and a private admin dashboard.",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "concurrently -n api,web -c yellow,cyan \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "nodemon --watch src --ext js,sql src/server.js",
+    "dev:web": "npm --prefix client run dev",
+    "build": "npm --prefix client install --no-audit --no-fund && npm --prefix client run build",
+    "start": "node src/server.js",
+    "db:migrate": "node src/db/migrate.js",
+    "db:migrate:status": "node src/db/migrate.js status",
+    "db:prune": "node scripts/prune.js",
+    "admin:create": "node scripts/create-admin.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "postinstall": "echo \"Next: npm run db:migrate && npm run admin:create\""
+  },
+  "keywords": [],
+  "author": "Sahil Zagade",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "compression": "^1.8.2",
+    "connect-pg-simple": "^10.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
+    "pg": "^8.23.0",
+    "ua-parser-js": "^2.0.10",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5",
+    "jsdom": "^30.1.1",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.3.0",
+    "vitest": "^5.0.1"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
