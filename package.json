@@ -7,7 +7,7 @@
     "dev": "concurrently -n api,web -c yellow,cyan \"npm:dev:api\" \"npm:dev:web\"",
     "dev:api": "nodemon --watch src --ext js,sql src/server.js",
     "dev:web": "npm --prefix client run dev",
-    "build": "npm --prefix client install --no-audit --no-fund && npm --prefix client run build",
+    "build": "npm --prefix client install --include=dev --no-audit --no-fund && npm --prefix client run build",
     "start": "node src/server.js",
     "db:migrate": "node src/db/migrate.js",
     "db:migrate:status": "node src/db/migrate.js status",
@@ -48,3 +48,4 @@
     "node": ">=20.0.0"
   }
 }
+
