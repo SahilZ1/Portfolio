@@ -25,7 +25,7 @@ export const site = {
   lastName: "Zagade",
 
   /** Shown under the name in the hero, revealed one at a time. */
-  disciplines: ["Cybersecurity", "Cloud", "Security Engineering"],
+  disciplines: ["Software Engineering", "Cloud", "Security"],
 
   /** The one-line positioning statement. */
   statement: "I build, secure and analyse systems.",
@@ -35,25 +35,33 @@ export const site = {
    * is verifiable by anyone reading the source — no claims beyond that.
    */
   intro:
-    "This site is the evidence. The portfolio you are reading runs on an Express and PostgreSQL backend I built, with a first-party analytics platform behind it — anonymous visitor tracking, session reconstruction, traffic-flow analysis and a private security console — designed with the privacy and hardening decisions documented in the open.",
+    "Final-year Computing Science (Honours) student at UTS and software engineer intern at AIIDA, building backend services in Python, FastAPI, Node.js and PostgreSQL. This site is the evidence: it runs on an Express and PostgreSQL backend I wrote, with a first-party analytics platform behind it — anonymous visitor tracking, session reconstruction, traffic-flow analysis and a private console — designed with the privacy and hardening decisions documented in the open.",
 
-  location: TODO("Your city / country, e.g. “Melbourne, Australia”"),
-  availability: TODO("e.g. “Open to graduate security engineering roles from July 2026”"),
+  location: "Sydney, NSW, Australia",
+  availability:
+    "Final-year student at UTS, open to graduate software engineering roles in Sydney.",
 
   links: {
-    github: TODO("https://github.com/your-username"),
-    linkedin: TODO("https://www.linkedin.com/in/your-profile"),
-    email: TODO("your.email@example.com"),
-    resume: TODO("/resume.pdf — drop the file in client/public/ and set this to /resume.pdf"),
+    github: "https://github.com/SahilZ1",
+    linkedin: TODO("https://www.linkedin.com/in/your-profile — add your LinkedIn URL here"),
+    email: "sahil.zagade21@gmail.com",
+    resume: "/Sahil-Zagade-Resume.docx",
   },
 
   seo: {
     titleTemplate: "%s · Sahil Zagade",
-    defaultTitle: "Sahil Zagade · Cybersecurity & Security Engineering",
+    defaultTitle: "Sahil Zagade · Software Engineer",
     description:
-      "Cybersecurity and security engineering portfolio of Sahil Zagade. Projects, a hands-on Cyber Lab, and a custom-built first-party analytics platform running on Node.js, Express and PostgreSQL.",
-    /** Set to your deployed origin; used for canonical URLs and OpenGraph. */
-    siteUrl: TODO("https://your-domain.com"),
+      "Portfolio of Sahil Zagade — graduate software engineer in Sydney. Backend development in Python, FastAPI, Node.js and PostgreSQL, AWS certified, with a hands-on Cyber Lab and a custom-built first-party analytics platform.",
+    /**
+     * Deployed origin, used for canonical URLs and OpenGraph.
+     *
+     * This is currently a per-deployment Vercel hostname, which changes each
+     * time the project is redeployed. Point it at the stable production alias
+     * (or a custom domain) as soon as one is set, otherwise canonical URLs will
+     * go stale on the next deploy.
+     */
+    siteUrl: "https://portfolio-dssg0jy6h-self-a6da.vercel.app",
   },
 };
 

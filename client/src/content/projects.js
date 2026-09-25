@@ -197,7 +197,7 @@ Sessions are reconstructed server-side from activity with a 30-minute inactivity
     screenshots: [],
 
     links: {
-      github: TODO("https://github.com/your-username/portfolio — add once this repo is pushed"),
+      github: "https://github.com/SahilZ1/Portfolio",
       demo: null,
     },
   },

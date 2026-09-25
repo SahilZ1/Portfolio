@@ -33,12 +33,14 @@ export default function Certifications() {
                 </p>
 
                 <dl className="cert-card__meta">
-                  <div>
-                    <dt>Issued</dt>
-                    <dd>
-                      <Text value={certification.date} />
-                    </dd>
-                  </div>
+                  {certification.date && (
+                    <div>
+                      <dt>Issued</dt>
+                      <dd>
+                        <Text value={certification.date} />
+                      </dd>
+                    </div>
+                  )}
                   <div>
                     <dt>Status</dt>
                     <dd>

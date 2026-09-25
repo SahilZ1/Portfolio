@@ -141,7 +141,7 @@ export default function Contact() {
               <span className="contact__label">Résumé</span>
               {isReal(resume) ? (
                 <>
-                  <span className="contact__value">PDF download</span>
+                  <span className="contact__value">Download a copy</span>
                   <div className="contact__actions">
                     <a
                       href={resume}

@@ -61,7 +61,7 @@ export function PersonSchema() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: site.name,
-    jobTitle: "Cybersecurity & Security Engineering",
+    jobTitle: "Software Engineer",
     description: site.seo.description,
     ...(sameAs.length > 0 ? { sameAs } : {}),
     ...(isTodo(site.seo.siteUrl) ? {} : { url: site.seo.siteUrl }),

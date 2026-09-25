@@ -1,45 +1,43 @@
 /**
  * Experience, skills, certifications and education.
  *
- * Almost everything in this file is a placeholder. Sahil's employment history,
- * dates, grades, certification numbers and institutions were not available when
- * this was built, and inventing them would be fabricating a professional record
- * — the one thing a portfolio must never do.
+ * Every factual claim in this file — employers, dates, qualifications and
+ * certifications — comes from Sahil's own résumé. Nothing is inferred or
+ * embellished; where the résumé carries no number, the entry describes the work
+ * concretely rather than inventing a metric.
  *
- * The exception is `evidencedSkills`, which lists only capabilities a reader can
- * verify by looking at this repository. That distinction is shown on the page:
- * evidenced skills are marked as demonstrated by this site, and the rest are for
- * Sahil to fill in from his own experience.
+ * `evidencedSkills` is kept deliberately separate from `skillGroups`. The former
+ * lists only capabilities a reader can verify by looking at this repository, and
+ * the page labels them as such. The latter is experience from elsewhere.
  */
-
-import { TODO } from "./site.js";
 
 /* ------------------------------------------------------------------ about -- */
 
 export const about = {
   /** Two or three paragraphs in first person. */
   bio: [
-    TODO("Paragraph 1 — who you are and what you work on. Lead with your strongest, most specific fact."),
-    TODO("Paragraph 2 — how you got here, and what you are drawn to within security."),
-    TODO("Paragraph 3 — what you are looking for next."),
+    "I am a final-year Bachelor of Computing Science (Honours) student at UTS, currently a software engineer intern at AIIDA in Sydney. I build backend systems — RESTful APIs and services in Python, FastAPI and Node.js, backed by relational data models in PostgreSQL — and I take them the whole way through the lifecycle, from design to test to a deployed release.",
+    "I came to engineering through the full stack rather than a single layer, which is why the security side of the work holds my attention as much as the building does. Designing a schema, deciding what not to store, working out which cookie attribute defends against which attack: those turn out to be the same kind of problem as making a query fast or an API predictable. This site is where I do that work in the open — the analytics platform behind it is mine, and so are the hardening decisions documented alongside it.",
+    "I am AWS Certified, working through the CCNA, and looking for graduate software engineering work where backend development, cloud deployment and security are part of one role rather than three separate teams.",
   ],
 
   /** Short factual rows shown beside the bio. */
   facts: [
-    { label: "Focus", value: TODO("e.g. Application security, cloud security") },
-    { label: "Location", value: TODO("e.g. Melbourne, Australia") },
-    { label: "Currently", value: TODO("e.g. Final-year Cybersecurity student / Security Analyst at …") },
-    { label: "Looking for", value: TODO("e.g. Graduate security engineering roles") },
+    { label: "Focus", value: "Backend engineering, cloud deployment, security engineering" },
+    { label: "Location", value: "Sydney, NSW, Australia" },
+    { label: "Currently", value: "Software Engineer Intern at AIIDA · Final-year BCompSci (Hons), UTS" },
+    { label: "Looking for", value: "Graduate software engineering roles" },
   ],
 
   /**
-   * Things you actually care about technically. Strong differentiator on a
-   * portfolio — but write your own; these must be yours.
+   * Technical convictions. Drafted from the work in this repository and the
+   * résumé — worth reading through and rewording into your own voice.
    */
   principles: [
-    TODO("A principle you hold about building secure systems."),
-    TODO("Another one."),
-    TODO("A third."),
+    "Privacy decisions are mostly schema decisions. Choosing not to store a column is a far stronger control than choosing not to look at it.",
+    "An exemption you can explain is fine; an exemption you inherited is a finding. That holds for a CSP directive, a database grant and a dependency alike.",
+    "Automate the workflow you have done by hand three times. A lot of the leverage on an engineering team sits in the scripts nobody asked for.",
+    "Code is read far more often than it is written, and documented far less often than it should be. Both are part of shipping, not something that happens after.",
   ],
 };
 
@@ -47,26 +45,52 @@ export const about = {
 
 export const experience = [
   {
-    role: TODO("Job title"),
-    organisation: TODO("Employer"),
-    period: TODO("e.g. Feb 2025 – present"),
-    location: TODO("e.g. Melbourne, hybrid"),
-    summary: TODO("One sentence on the remit of the role."),
+    role: "Software Engineer Intern",
+    organisation: "AIIDA",
+    period: "Apr 2026 – present",
+    location: "Sydney, NSW",
+    summary:
+      "Backend engineering across the full software development lifecycle — API design and development through to testing, deployment and production support.",
     highlights: [
-      TODO("A specific thing you did and its effect. Avoid unquantified claims — if you have no number, describe the change concretely instead."),
-      TODO("Another."),
-      TODO("Another."),
+      "Designed and built RESTful APIs and backend services in Python, FastAPI and Node.js, taking features from design through development, integration and test to release.",
+      "Deployed and maintained applications on Vercel using CI/CD-style workflows, shipping reliable releases to production.",
+      "Designed and managed relational data models in PostgreSQL, writing optimised SQL for application storage, retrieval and reporting.",
+      "Wrote automation tooling and scripts in Python and Bash to streamline engineering workflows and remove repeated manual work.",
+      "Collaborated with senior consultants in a multidisciplinary team, documenting work in structured technical writing pitched at both technical and non-technical stakeholders.",
     ],
-    stack: [TODO("Tools and technologies you actually used")],
+    stack: ["Python", "FastAPI", "Node.js", "PostgreSQL", "SQL", "Bash", "Vercel", "CI/CD", "Git"],
   },
   {
-    role: TODO("Previous job title — duplicate or delete this block as needed"),
-    organisation: TODO("Employer"),
-    period: TODO("e.g. Jul 2023 – Jan 2025"),
-    location: TODO("Location"),
-    summary: TODO("One sentence."),
-    highlights: [TODO("Highlight"), TODO("Highlight")],
-    stack: [TODO("Technologies")],
+    role: "Oncology Medical Secretary",
+    organisation: "NSW Health",
+    period: "Feb 2025 – Apr 2026",
+    location: "Sydney, NSW",
+    summary:
+      "Senior administrative support inside a large clinical organisation operating under strict governance, confidentiality and data-handling requirements.",
+    highlights: [
+      "Worked with sensitive patient information under formal confidentiality and data-handling obligations — the practical version of the least-privilege and access-control reasoning I now apply to systems.",
+      "Coordinated across internal clinical teams and external stakeholders, keeping records accurate in a high-volume environment where an error has real consequences.",
+      "Produced professional reports and correspondence for senior clinicians, to the standards of a governance-heavy organisation.",
+    ],
+    stack: [
+      "Governance & compliance",
+      "Confidential data handling",
+      "Stakeholder coordination",
+      "Technical reporting",
+    ],
+  },
+  {
+    role: "Software Developer Intern",
+    organisation: "AEK Media",
+    period: "Mar 2024 – May 2024",
+    location: "Sydney, NSW",
+    summary:
+      "Built and shipped AI chatbot applications that automated customer service workflows in a live production environment.",
+    highlights: [
+      "Developed and deployed AI chatbot applications to automate customer service workflows, running against real users rather than a staging dataset.",
+      "Designed and integrated backend data storage on SQL databases, contributing to a scalable and maintainable application architecture.",
+    ],
+    stack: ["AI chatbots", "SQL databases", "Backend integration", "Production deployment"],
   },
 ];
 
@@ -120,25 +144,64 @@ export const evidencedSkills = [
 ];
 
 /**
- * Sahil's own skills, beyond what this repository shows.
- * Fill these in — they are the ones a security recruiter will scan for.
+ * The wider toolkit — from work and study beyond this repository.
  */
 export const skillGroups = [
   {
-    group: "Security",
-    items: [TODO("e.g. Threat modelling, SIEM, incident response, penetration testing")],
-  },
-  {
-    group: "Cloud & infrastructure",
-    items: [TODO("e.g. AWS, Azure, Terraform, Docker, Kubernetes")],
-  },
-  {
     group: "Languages",
-    items: [TODO("e.g. Python, JavaScript, Go, Bash, SQL")],
+    items: ["Python", "SQL", "JavaScript (Node.js)", "Bash scripting"],
   },
   {
-    group: "Tools",
-    items: [TODO("e.g. Burp Suite, Wireshark, Nmap, Splunk, Metasploit")],
+    group: "Frameworks & backend",
+    items: [
+      "FastAPI",
+      "Node.js",
+      "RESTful API design & development",
+      "Automation tooling",
+      "Integration & test",
+    ],
+  },
+  {
+    group: "Databases",
+    items: [
+      "PostgreSQL",
+      "Relational data modelling",
+      "Query optimisation",
+      "Data cleaning & modelling",
+    ],
+  },
+  {
+    group: "Cloud & deployment",
+    items: [
+      "AWS (certified)",
+      "Vercel",
+      "CI/CD workflows",
+      "Linux & Windows environments",
+      "Virtualisation",
+    ],
+  },
+  {
+    group: "Developer tools",
+    items: ["Git version control", "Claude Code (AI-assisted development)", "Android Studio", "Xcode"],
+  },
+  {
+    group: "Software practice",
+    items: [
+      "Full software development lifecycle",
+      "Scalability & performance",
+      "Maintainable, testable code",
+      "Technical documentation",
+    ],
+  },
+  {
+    group: "Professional",
+    items: [
+      "Analytical thinking",
+      "Problem solving",
+      "Stakeholder communication",
+      "Cross-functional collaboration",
+      "Adaptability",
+    ],
   },
 ];
 
@@ -146,20 +209,20 @@ export const skillGroups = [
 
 export const certifications = [
   {
-    name: TODO("Certification name, e.g. CompTIA Security+"),
-    issuer: TODO("Issuing body"),
-    date: TODO("Issued date"),
-    credentialId: TODO("Credential ID, or delete this line"),
-    url: TODO("Verification URL, or delete this line"),
-    status: TODO("e.g. “Held” / “In progress — exam booked for …”"),
+    name: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
+    date: "April 2026",
+    status: "Held",
   },
   {
-    name: TODO("Second certification — duplicate or delete this block"),
-    issuer: TODO("Issuing body"),
-    date: TODO("Issued date"),
-    credentialId: TODO("Credential ID"),
-    url: TODO("Verification URL"),
-    status: TODO("Status"),
+    name: "Cisco Certified Network Associate (CCNA)",
+    issuer: "Cisco",
+    status: "In progress — commenced March 2026",
+  },
+  {
+    name: "Data Analytics",
+    issuer: "University of Technology Sydney",
+    status: "Completed — SQL, data cleaning and data modelling",
   },
 ];
 
@@ -167,10 +230,18 @@ export const certifications = [
 
 export const education = [
   {
-    qualification: TODO("e.g. Bachelor of Cybersecurity"),
-    institution: TODO("University name"),
-    period: TODO("e.g. 2022 – 2026"),
-    location: TODO("Location"),
-    detail: TODO("Relevant coursework, major, thesis topic, or notable results. Do not list a grade you do not have."),
+    qualification: "Bachelor of Computing Science (Honours)",
+    institution: "University of Technology Sydney",
+    period: "Feb 2023 – present",
+    location: "Sydney, NSW",
+    detail:
+      "Final year. Coursework across software development, databases, networking and cloud, with an Honours research component.",
+  },
+  {
+    qualification: "Diploma of Information Technology",
+    institution: "University of Technology Sydney",
+    period: "Completed Jan 2024",
+    location: "Sydney, NSW",
+    detail: "Completed alongside the Bachelor of Computing Science.",
   },
 ];
