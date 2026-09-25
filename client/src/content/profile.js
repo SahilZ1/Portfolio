@@ -237,11 +237,4 @@ export const education = [
     detail:
       "Final year. Coursework across software development, databases, networking and cloud, with an Honours research component.",
   },
-  {
-    qualification: "Diploma of Information Technology",
-    institution: "University of Technology Sydney",
-    period: "Completed Jan 2024",
-    location: "Sydney, NSW",
-    detail: "Completed alongside the Bachelor of Computing Science.",
-  },
 ];
