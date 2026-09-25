@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Seo } from "../components/Seo.jsx";
 import { PageHeader } from "../components/PageHeader.jsx";
 import { Reveal, RevealGroup, RevealItem } from "../components/Reveal.jsx";
+import { Text, isReal } from "../components/Todo.jsx";
+import { site } from "../content/site.js";
 import { analytics } from "../lib/analytics.js";
 
 /**
@@ -11,9 +13,17 @@ import { analytics } from "../lib/analytics.js";
  * is collected field by field, what is deliberately NOT collected, why each
  * cookie has the settings it has, and where the assumptions and limits lie.
  *
- * It does not claim compliance with any particular regime, because that depends
- * on where the site is operated and who visits, and an unqualified compliance
- * claim on a personal site is usually wrong.
+ * The Australian section sets out the position under the Privacy Act 1988 (Cth)
+ * honestly: a personal portfolio operated by an individual is almost certainly
+ * not an APP entity, so the Act very likely does not bind this site at all. The
+ * page says that plainly and then commits to the Australian Privacy Principles
+ * anyway, which is a stronger and more accurate position than asserting a
+ * compliance that was never required. It is not legal advice.
+ *
+ * One wording rule, worth keeping: this page must never say the analytics data
+ * is "not stored". It is stored — in this application's own PostgreSQL, for a
+ * documented 400 days. The commitment that matters, and the one that is true,
+ * is that it is never sold and never disclosed to anyone.
  */
 
 /** Exactly what is stored, per table. Mirrors the actual schema. */
@@ -95,6 +105,34 @@ const COOKIES = [
   },
 ];
 
+/**
+ * The handling commitments, stated positively.
+ *
+ * Each of these is checkable against the source of this site rather than being
+ * a promise the reader has to take on trust.
+ */
+const COMMITMENTS = [
+  "Your data is never sold. There is no commercial arrangement of any kind attached to this site, and no circumstance in which analytics data is offered, licensed or traded.",
+  "Your data is never disclosed, exchanged or shared with any other person, business or advertising network. No third-party analytics, no tag manager, no advertising pixel, no data broker, no external script of any kind.",
+  "Your data is used for exactly two purposes: improving this website, and letting the site owner see which pages are read most. It is not used for advertising, profiling, scoring, automated decision-making, or building a profile of you as a person.",
+  "Your data stays on this site's own infrastructure. It is written to this application's own database and read back only by the private admin console, which one person can sign in to.",
+  "Your data is deleted after 400 days by a scheduled job that actually runs, not by a policy that merely says so.",
+  "No marketing, ever. The site collects no email address, sends no email, and operates no mailing list.",
+];
+
+/** How the Australian Privacy Principles are applied here, principle by principle. */
+const APP_ALIGNMENT = [
+  ["APP 1 — Open and transparent management", "This page is the policy. It lists every stored field, every cookie and every setting, and names the purposes the data is put to."],
+  ["APP 3 — Collection of solicited personal information", "Only what is needed to count visits and see which pages are read. No name, email, address, phone number or account is collected, because the site never asks for one."],
+  ["APP 5 — Notification of collection", "This page is linked from the footer of every page on the site, and a notice appears on a first visit."],
+  ["APP 6 — Use and disclosure", "Used only for the two purposes above. Disclosed to nobody. The only exceptions are the two infrastructure matters named in the limits section below."],
+  ["APP 7 — Direct marketing", "Not applicable. The site does no direct marketing and holds no contact details to do it with."],
+  ["APP 8 — Cross-border disclosure", "The site is hosted on infrastructure operated by an overseas provider. See the limits section for what that means in practice."],
+  ["APP 11 — Security of personal information", "Parameterised SQL throughout, a strict Content Security Policy, bcrypt password hashing, rate limiting and account lockout on the console, and HttpOnly cookies. The Cyber Lab write-ups on this site document these controls in detail."],
+  ["APP 11.2 — Destruction or de-identification", "The 400-day retention window is enforced by a scheduled prune job, which deletes expired visitor records and cascades to their sessions, page views and events."],
+  ["APP 12 & 13 — Access and correction", "You can request access to, or correction of, anything held against your identifier. See the note on what that involves in practice."],
+];
+
 function OptOut() {
   const [state, setState] = useState("idle");
 
@@ -156,11 +194,123 @@ export default function Privacy() {
               <p>
                 <strong>The short version.</strong> One first-party cookie holds a random number so
                 repeat visits can be counted. The pages you open and the links you click are
-                recorded against it. No third party is involved, nothing leaves this server, your
-                IP address is never stored, and no fingerprint is taken.
+                recorded against it, stored in this site&rsquo;s own database, and used for two
+                things only: improving the site, and letting me see which pages are read most.
+              </p>
+              <p>
+                <strong>It is never sold, and never shared with anyone.</strong> No third-party
+                analytics, no advertising network, no data broker. Your IP address is never stored,
+                no fingerprint is taken, and everything is deleted after 400 days.
               </p>
             </div>
           </Reveal>
+
+          <section className="privacy__section">
+            <Reveal>
+              <h2 className="title-l">How your data is handled</h2>
+              <p className="lede">
+                Six commitments. Each one is checkable against the source of this site.
+              </p>
+            </Reveal>
+            <RevealGroup as="ul" className="privacy__never privacy__commitments" gap={0.04}>
+              {COMMITMENTS.map((item, index) => (
+                <RevealItem as="li" key={index}>
+                  <span className="privacy__check" aria-hidden="true" />
+                  <span>{item}</span>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </section>
+
+          <section className="privacy__section">
+            <Reveal>
+              <h2 className="title-l">Your privacy under Australian law</h2>
+              <div className="prose">
+                <p>
+                  This site is operated from Sydney, New South Wales, by one person, as a personal
+                  portfolio. The relevant law is the <strong>Privacy Act 1988 (Cth)</strong> and
+                  the thirteen <strong>Australian Privacy Principles</strong> in Schedule 1 of that
+                  Act.
+                </p>
+                <p>
+                  <strong>
+                    Whether the Act binds this site is doubtful, and it is handled as though it
+                    does.
+                  </strong>{" "}
+                  The Privacy Act applies to &ldquo;APP entities&rdquo;, and small business
+                  operators with an annual turnover of $3 million or less are generally excluded by
+                  section 6D. A personal portfolio with no turnover almost certainly falls outside
+                  the Act entirely. Rather than rely on that exemption, this site is run to the
+                  Australian Privacy Principles anyway &mdash; the commitments above go further
+                  than the Act would require in several places, particularly on disclosure and
+                  retention.
+                </p>
+                <p>
+                  <strong>
+                    Most of what is collected here is probably not personal information at all.
+                  </strong>{" "}
+                  Under section 6(1) of the Act, personal information means information about an
+                  identified individual, or one who is reasonably identifiable. The identifier this
+                  site stores is a random number generated by the server, connected to no name, no
+                  email address, no account and no IP address. There is nothing held here that
+                  could reasonably identify you. It is still treated as though it were personal
+                  information, because it is stable across your visits and that is the cautious
+                  reading.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.05}>
+              <h3 className="title-s privacy__subhead">The principles, applied</h3>
+              <dl className="privacy__fields privacy__apps">
+                {APP_ALIGNMENT.map(([principle, detail]) => (
+                  <div key={principle}>
+                    <dt>{principle}</dt>
+                    <dd>{detail}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <h3 className="title-s privacy__subhead">Access, correction and complaints</h3>
+              <div className="prose">
+                <p>
+                  Under APP 12 and APP 13 you can ask what is held against your identifier, ask for
+                  it to be corrected, or ask for it to be deleted outright. The practical
+                  difficulty is a consequence of the privacy design rather than an evasion: the
+                  site holds nothing that identifies you, so there is no way to look you up by
+                  name. Your identifier sits in an HttpOnly cookie your browser will not let a
+                  script read, so the realistic options are to read it from your browser&rsquo;s
+                  cookie inspector and quote it, or simply to use the opt-out button below, which
+                  clears it and stops any further recording immediately.
+                </p>
+                <p>
+                  Privacy enquiries and complaints go to{" "}
+                  {isReal(site.links.email) ? (
+                    <a href={`mailto:${site.links.email}`}>{site.links.email}</a>
+                  ) : (
+                    <Text value={site.links.email} />
+                  )}
+                  . I will acknowledge a complaint within 7 days and respond substantively within
+                  30 days, which is the timeframe the Australian Privacy Principles set for an APP
+                  entity.
+                </p>
+                <p>
+                  If you are not satisfied with the response, you can complain to the{" "}
+                  <strong>Office of the Australian Information Commissioner</strong>, the national
+                  privacy regulator, at oaic.gov.au or on 1300 363 992.
+                </p>
+                <p>
+                  <strong>Data breaches.</strong> The Notifiable Data Breaches scheme in Part IIIC
+                  of the Privacy Act requires eligible breaches to be reported to the OAIC and to
+                  affected individuals. Since this site holds no contact details, notifying you
+                  individually would not be possible &mdash; so in the event of a breach affecting
+                  analytics data, a notice would be published on this page and the OAIC notified.
+                </p>
+              </div>
+            </Reveal>
+          </section>
 
           <section className="privacy__section">
             <Reveal>
@@ -262,11 +412,11 @@ export default function Privacy() {
               <h2 className="title-l">Assumptions and limits</h2>
               <div className="prose privacy__limits">
                 <p>
-                  <strong>This is not a legal compliance statement.</strong> Whether a jurisdiction
-                  requires prior consent for first-party analytics depends on where the site is
-                  operated and who visits it. This page describes what the software actually does;
-                  it does not assert compliance with GDPR, the ePrivacy Directive, CCPA or any
-                  other regime, and it is not legal advice.
+                  <strong>This page is not legal advice.</strong> It sets out the Australian
+                  position above, and describes what the software actually does. It makes no claim
+                  about the GDPR, the ePrivacy Directive, the CCPA or any other overseas regime,
+                  which may impose requirements &mdash; prior consent for analytics cookies, in
+                  particular &mdash; that this site does not attempt to meet.
                 </p>
                 <p>
                   <strong>The identifier is pseudonymous, not anonymous.</strong> It is random and
@@ -282,16 +432,25 @@ export default function Privacy() {
                   the intended trade.
                 </p>
                 <p>
-                  <strong>Server logs.</strong> The hosting platform may keep its own request logs,
-                  including IP addresses, outside this application's control. That is standard for
-                  any web host and is separate from the analytics described here.
+                  <strong>Server logs, and the cross-border position (APP 8).</strong> This site is
+                  deployed on Vercel, a hosting provider incorporated in the United States, and is
+                  served from its Sydney region. Like any web host, Vercel may keep its own request
+                  logs, including IP addresses, under its own privacy policy and outside this
+                  application&rsquo;s control. That is a disclosure to an overseas recipient in the
+                  APP 8 sense, it is unavoidable for any hosted website, and it is separate from
+                  the analytics described on this page. The analytics database itself is not shared
+                  with anyone.
                 </p>
                 <p>
                   <strong>AI analysis.</strong> The private console can optionally pass aggregated
-                  statistics — counts, rates and page paths — to a language model to generate
-                  commentary. Individual records are never included, and the feature is disabled
-                  unless a provider is explicitly configured.
+                  statistics &mdash; counts, rates and page paths &mdash; to a language model to
+                  generate commentary. Individual records and identifiers are never included, only
+                  totals. This is the one path on which any analytics-derived data leaves the
+                  server, which is why it is named here rather than left inside the blanket
+                  commitment above. The feature is off unless a provider is explicitly configured,
+                  and it is currently not configured.
                 </p>
+                <p className="privacy__updated">Last updated: 26 September 2026.</p>
               </div>
             </Reveal>
           </section>
