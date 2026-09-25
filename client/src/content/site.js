@@ -56,12 +56,11 @@ export const site = {
     /**
      * Deployed origin, used for canonical URLs and OpenGraph.
      *
-     * This is currently a per-deployment Vercel hostname, which changes each
-     * time the project is redeployed. Point it at the stable production alias
-     * (or a custom domain) as soon as one is set, otherwise canonical URLs will
-     * go stale on the next deploy.
+     * This is the project's stable Vercel alias, which survives redeploys —
+     * not a per-deployment hostname, which would go stale on the next push.
+     * Replace it with a custom domain if one is ever added.
      */
-    siteUrl: "https://portfolio-dssg0jy6h-self-a6da.vercel.app",
+    siteUrl: "https://portfolio-self-a6da.vercel.app",
   },
 };
 

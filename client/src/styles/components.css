@@ -1663,3 +1663,42 @@ a.contact__value { border-bottom: 2px solid var(--brand); align-self: flex-start
   overflow-x: auto;
   max-height: 340px;
 }
+
+/* --------------------------------------------------- smaller repositories -- */
+/* Listed on the Projects page beneath the case studies. Deliberately lighter
+   than a project row: these are utilities and coursework, and the card should
+   read as a pointer to source rather than as a case study in miniature. */
+
+.repo__grid { margin-block: var(--space-6); }
+
+.repo-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.repo-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.repo-card__name { margin: 0; }
+
+.repo-card__desc {
+  flex: 1;
+  font-size: var(--step--1);
+  margin-bottom: var(--space-4);
+}
+
+.repo-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--step--1);
+  font-weight: 620;
+  color: var(--ink);
+}

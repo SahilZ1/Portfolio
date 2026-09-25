@@ -24,17 +24,26 @@ function Body({ value }) {
   );
 }
 
-function Section({ id, eyebrow, title, children }) {
+function Section({ id, number, eyebrow, title, children }) {
   return (
     <section className="case__section" id={id}>
       <Reveal>
-        <p className="eyebrow">{eyebrow}</p>
+        <p className="eyebrow">
+          {String(number).padStart(2, "0")} — {eyebrow}
+        </p>
         <h2 className="title-l case__title">{title}</h2>
       </Reveal>
       <Reveal delay={0.05}>{children}</Reveal>
     </section>
   );
 }
+
+/** True when a section has something worth rendering. */
+const present = (value) => {
+  if (value === null || value === undefined || value === "") return false;
+  if (Array.isArray(value)) return value.length > 0;
+  return true;
+};
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -48,7 +57,143 @@ export default function ProjectDetail() {
 
   if (!project) return <Navigate to="/projects" replace />;
 
-  const { sections } = project;
+  const sections = project.sections ?? {};
+
+  /*
+   * Sections are assembled and then filtered, rather than each being rendered
+   * with its own guard, so the numbering stays contiguous. A project that has
+   * no security section should not leave a gap where "07" used to be — and,
+   * more importantly, a missing section must never be a reason to invent
+   * content to fill the heading.
+   */
+  const blocks = [
+    {
+      id: "overview",
+      eyebrow: "Overview",
+      title: "What it is",
+      show: present(sections.overview),
+      render: () => <Body value={sections.overview} />,
+    },
+    {
+      id: "problem",
+      eyebrow: "Problem",
+      title: "Why it needed building",
+      show: present(sections.problem),
+      render: () => <Body value={sections.problem} />,
+    },
+    {
+      id: "solution",
+      eyebrow: "Solution",
+      title: "The approach",
+      show: present(sections.solution),
+      render: () => <Body value={sections.solution} />,
+    },
+    {
+      id: "architecture",
+      eyebrow: "Architecture",
+      title: "How it fits together",
+      show: present(sections.architecture?.description) || present(sections.architecture?.flow),
+      render: () => (
+        <>
+          <Body value={sections.architecture?.description} />
+          <ArchitectureFlow steps={sections.architecture?.flow} />
+        </>
+      ),
+    },
+    {
+      id: "capabilities",
+      eyebrow: "Capabilities",
+      title: "What it does",
+      show: present(sections.capabilities?.description) || present(sections.capabilities?.items),
+      render: () => (
+        <>
+          <Body value={sections.capabilities?.description} />
+          <TextList items={sections.capabilities?.items} className="case__list" />
+        </>
+      ),
+    },
+    {
+      id: "technology",
+      eyebrow: "Technology",
+      title: "Stack",
+      show: present(sections.technology),
+      render: () => (
+        <RevealGroup className="case__tech" gap={0.05}>
+          {sections.technology.map((row) => (
+            <RevealItem key={row.area} className="case__tech-row">
+              <span className="case__tech-area">{row.area}</span>
+              <span className="case__tech-value">
+                <Text value={row.value} />
+              </span>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      ),
+    },
+    {
+      id: "security",
+      eyebrow: "Security",
+      title: "Security decisions",
+      show: present(sections.security?.description) || present(sections.security?.items),
+      render: () => (
+        <>
+          <Body value={sections.security?.description} />
+          {present(sections.security?.items) && (
+            <ul className="case__security">
+              {sections.security.items.map((item, index) => (
+                <li key={index}>
+                  <span className="case__shield" aria-hidden="true" />
+                  <span>
+                    <Text value={item} />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
+      ),
+    },
+    {
+      id: "screenshots",
+      eyebrow: "Screenshots",
+      title: "What it looks like",
+      show: project.screenshots?.length > 0,
+      render: () => (
+        <div className="grid grid--wide case__shots">
+          {project.screenshots.map((shot) => (
+            <figure key={shot.src} className="case__shot">
+              {/* loading="lazy" keeps below-the-fold images out of the
+                  initial load; explicit dimensions would be better still
+                  once real assets exist, to reserve layout space. */}
+              <img src={shot.src} alt={shot.alt} loading="lazy" decoding="async" />
+              {shot.caption && <figcaption>{shot.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      ),
+    },
+    {
+      id: "challenges",
+      eyebrow: "Challenges",
+      title: "What was hard",
+      show: present(sections.challenges),
+      render: () => <TextList items={sections.challenges} className="case__list" />,
+    },
+    {
+      id: "results",
+      eyebrow: "Results",
+      title: "Outcome",
+      show: present(sections.results),
+      render: () => <Body value={sections.results} />,
+    },
+    {
+      id: "lessons",
+      eyebrow: "Lessons",
+      title: "What I took away",
+      show: present(sections.lessons),
+      render: () => <TextList items={sections.lessons} className="case__list" />,
+    },
+  ].filter((block) => block.show);
 
   return (
     <>
@@ -118,84 +263,17 @@ export default function ProjectDetail() {
       </header>
 
       <div className="shell shell--wide case__body">
-        <Section id="overview" eyebrow="01 — Overview" title="What it is">
-          <Body value={sections.overview} />
-        </Section>
-
-        <Section id="problem" eyebrow="02 — Problem" title="Why it needed building">
-          <Body value={sections.problem} />
-        </Section>
-
-        <Section id="solution" eyebrow="03 — Solution" title="The approach">
-          <Body value={sections.solution} />
-        </Section>
-
-        <Section id="architecture" eyebrow="04 — Architecture" title="How it fits together">
-          <Body value={sections.architecture.description} />
-          <ArchitectureFlow steps={sections.architecture.flow} />
-        </Section>
-
-        <Section id="capabilities" eyebrow="05 — Capabilities" title="What it does">
-          <Body value={sections.capabilities.description} />
-          <TextList items={sections.capabilities.items} className="case__list" />
-        </Section>
-
-        <Section id="technology" eyebrow="06 — Technology" title="Stack">
-          <RevealGroup className="case__tech" gap={0.05}>
-            {sections.technology.map((row) => (
-              <RevealItem key={row.area} className="case__tech-row">
-                <span className="case__tech-area">{row.area}</span>
-                <span className="case__tech-value">
-                  <Text value={row.value} />
-                </span>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </Section>
-
-        <Section id="security" eyebrow="07 — Security" title="Security decisions">
-          <Body value={sections.security.description} />
-          <ul className="case__security">
-            {sections.security.items.map((item, index) => (
-              <li key={index}>
-                <span className="case__shield" aria-hidden="true" />
-                <span>
-                  <Text value={item} />
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        <Section id="screenshots" eyebrow="08 — Screenshots" title="What it looks like">
-          {project.screenshots.length > 0 ? (
-            <div className="grid grid--wide case__shots">
-              {project.screenshots.map((shot) => (
-                <figure key={shot.src} className="case__shot">
-                  {/* loading="lazy" keeps below-the-fold images out of the
-                      initial load; explicit dimensions would be better still
-                      once real assets exist, to reserve layout space. */}
-                  <img src={shot.src} alt={shot.alt} loading="lazy" decoding="async" />
-                  {shot.caption && <figcaption>{shot.caption}</figcaption>}
-                </figure>
-              ))}
-            </div>
-          ) : (
-            <Todo hint="Add screenshots to client/public/projects/ and reference them in content/projects.js" />
-          )}
-        </Section>
-
-        <Section id="challenges" eyebrow="09 — Challenges" title="What was hard">
-          <TextList items={sections.challenges} className="case__list" />
-        </Section>
-
-        <Section id="results" eyebrow="10 — Results" title="Outcome">
-          <Body value={sections.results} />
-        </Section>
-
-        <Section id="lessons" eyebrow="11 — Lessons" title="What I took away">
-          <TextList items={sections.lessons} className="case__list" />
-        </Section>
+        {blocks.map((block, index) => (
+          <Section
+            key={block.id}
+            id={block.id}
+            number={index + 1}
+            eyebrow={block.eyebrow}
+            title={block.title}
+          >
+            {block.render()}
+          </Section>
+        ))}
       </div>
 
       <section className="section cta">

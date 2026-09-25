@@ -192,8 +192,17 @@ function Proof() {
   );
 }
 
-/** Featured project cards. */
+/**
+ * Featured project cards.
+ *
+ * Drafts are excluded and the list is capped: the home page is a trailer, not
+ * the index. A case study still marked "in progress" has nothing to show a
+ * visitor who is thirty seconds in, and belongs on /projects where the label
+ * explaining it is visible.
+ */
 function FeaturedWork() {
+  const featured = projects.filter((project) => !project.draft).slice(0, 3);
+
   return (
     <section className="section">
       <div className="shell shell--wide">
@@ -208,7 +217,7 @@ function FeaturedWork() {
         </Reveal>
 
         <RevealGroup className="grid grid--wide" gap={0.1}>
-          {projects.map((project) => (
+          {featured.map((project) => (
             <RevealItem key={project.slug}>
               <Link
                 to={`/projects/${project.slug}`}
