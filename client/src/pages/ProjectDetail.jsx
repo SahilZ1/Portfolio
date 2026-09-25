@@ -254,7 +254,7 @@ export default function ProjectDetail() {
                   Live demo <span className="btn__arrow" aria-hidden="true">→</span>
                 </ExternalLink>
               )}
-              {!isReal(project.links?.github) && !isReal(project.links?.demo) && (
+              {project.draft && !isReal(project.links?.github) && !isReal(project.links?.demo) && (
                 <Todo hint="Add GitHub / demo URLs in content/projects.js" />
               )}
             </div>

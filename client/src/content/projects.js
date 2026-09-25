@@ -200,6 +200,105 @@ The detector holds per-source sliding windows and evaluates three rules against 
   },
 
   {
+    slug: "splunk-soc-lab",
+    name: "Splunk SOC Detection Lab",
+    tagline: "A working SIEM lab: Windows telemetry into Splunk, and seven detections built and validated on top of it.",
+    category: "SOC / Detection Engineering",
+    draft: false,
+    year: "2026",
+    status: "Lab complete",
+    accent: "threat",
+
+    summary:
+      "A hands-on security operations lab built on Splunk Enterprise, Windows Event Logs and Sysmon: seven detections covering credential attacks, suspicious execution and privilege changes, each implemented, alerted on and validated against activity generated in the lab.",
+
+    tags: ["Splunk Enterprise", "Sysmon", "Windows Event Logs", "SIEM", "MITRE ATT&CK", "Detection engineering"],
+
+    sections: {
+      overview: `A security operations lab built to do the day-to-day work of a SOC analyst rather than read about it: ingest Windows telemetry into a SIEM, write detections against it, fire the activity they are meant to catch, and confirm they actually caught it.
+
+Splunk Enterprise is the SIEM, with Windows Event Logs and Sysmon as the telemetry sources. Seven detections were implemented and validated, spanning credential attacks, suspicious process execution, privilege escalation and persistence-adjacent changes.
+
+The lab also produced an unplanned piece of SIEM administration experience: log ingestion broke partway through, and restoring it meant rebuilding the inputs configuration by hand.`,
+
+      problem: `Detection content is easy to copy and hard to trust. A rule taken from a blog post will run, and it will produce alerts, but running it teaches you nothing about whether it fires on the activity you care about, how often it fires on activity you do not, or what it costs to tune.
+
+The only way to know a detection works is to generate the behaviour it targets and watch it trigger — which requires an environment where generating that behaviour is safe.`,
+
+      solution: `Build the environment, then close the loop on every rule.
+
+Windows Event Logs and Sysmon feed Splunk Enterprise as the telemetry sources — between them they cover authentication, process creation, registry activity and account management, which is most of what the chosen detections need. Each detection was written as a search, promoted to an alert, then deliberately triggered by performing the activity in the lab and confirmed against the resulting events.
+
+Validating each rule against activity generated on purpose is what turns a search into a detection. It is also what surfaces tuning work — the difference between a rule that fires and a rule that fires on the right thing.`,
+
+      architecture: {
+        description:
+          "Endpoint telemetry flows from Windows into Splunk through a forwarder configuration, where saved searches back the alerts. The detections sit on top of two complementary sources: native Windows Event Logs for authentication and account management, Sysmon for process and registry detail.",
+        flow: [
+          "Windows endpoint",
+          "Windows Event Logs + Sysmon",
+          "inputs.conf ingestion",
+          "Splunk Enterprise",
+          "Saved searches",
+          "Alerts & triage",
+        ],
+      },
+
+      capabilities: {
+        description: "The seven detections implemented and validated in the lab.",
+        items: [
+          "Failed login attempts — the baseline credential-attack signal",
+          "Successful login following multiple failed attempts — the pattern that separates a successful brute force from ordinary mistyping",
+          "Suspicious PowerShell execution",
+          "New user account creation",
+          "User added to the Administrators group — privilege escalation via group membership",
+          "Registry modifications",
+          "Suspicious rundll32 execution — a common living-off-the-land binary",
+        ],
+      },
+
+      technology: [
+        { area: "SIEM", value: "Splunk Enterprise" },
+        { area: "Telemetry", value: "Windows Event Logs and Sysmon" },
+        { area: "Ingestion", value: "Forwarder inputs.conf, rebuilt by hand after ingestion failed" },
+        { area: "Detection", value: "Saved searches promoted to alerts, validated against generated activity" },
+        { area: "Frameworks", value: "MITRE ATT&CK and the Cyber Kill Chain" },
+        { area: "Environment", value: "Virtualised Windows endpoint, isolated from production" },
+      ],
+
+      security: {
+        description:
+          "The lab generates activity that detections are meant to catch — failed logins, privilege changes, suspicious execution — so containment matters.",
+        items: [
+          "All activity is generated inside a virtualised environment built for the exercise, isolated from any production system.",
+          "Only the detection logic and findings are published. No telemetry, host detail or configuration from the lab is shared.",
+          "Detections were validated by performing the behaviour deliberately, rather than by replaying samples of unknown provenance.",
+        ],
+      },
+
+      challenges: [
+        "Splunk stopped ingesting logs partway through the lab. Diagnosing it came down to the forwarder input configuration, and restoring ingestion meant rebuilding inputs.conf from scratch — which turned an interruption into the most useful SIEM administration experience in the project.",
+      ],
+
+      results:
+        "Seven detections implemented, alerted on and validated against activity generated in the lab, across credential attacks, suspicious execution, privilege escalation and registry modification — plus a restored ingestion pipeline after diagnosing and rebuilding the forwarder input configuration.",
+
+      lessons: [
+        "A detection is not finished when the search returns results. It is finished when you have fired the behaviour on purpose and watched the alert catch it.",
+        "Most of a SIEM analyst's time is not spent writing detections. Ingestion, parsing and tuning are the job, and a pipeline that quietly stops is worse than one that loudly breaks.",
+        "Detecting a successful login after repeated failures is far more valuable than detecting either signal alone — the sequence is the finding.",
+      ],
+    },
+
+    screenshots: [],
+
+    links: {
+      github: null,
+      demo: null,
+    },
+  },
+
+  {
     slug: "sysmon-reconnaissance-detection",
     name: "Detecting Reconnaissance with Sysmon",
     tagline: "A virtual SOC lab: an Nmap scan run against a Windows host, caught in Sysmon Event ID 3.",

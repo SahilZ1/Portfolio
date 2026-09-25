@@ -1,10 +1,16 @@
 /**
- * Experience, skills, certifications and education.
+ * Experience, skills, certifications, achievements and education.
  *
- * Every factual claim in this file — employers, dates, qualifications and
- * certifications — comes from Sahil's own résumé. Nothing is inferred or
- * embellished; where the résumé carries no number, the entry describes the work
- * concretely rather than inventing a metric.
+ * Every factual claim in this file — employers, titles, dates, qualifications,
+ * certifications and recognitions — comes from Sahil's own résumé and LinkedIn
+ * profile. Nothing is inferred or embellished; where neither source carries a
+ * number, the entry describes the work concretely rather than inventing a metric.
+ *
+ * Where the two sources describe the same role differently — the AIIDA
+ * internship is titled "Software Engineer Intern" on the résumé and "Cyber
+ * Security Analyst Intern" on LinkedIn — the LinkedIn title is used and the
+ * duties from both are kept. They are Sahil's own accounts of one job, so
+ * carrying both is more complete than picking one and quietly dropping the rest.
  *
  * `evidencedSkills` is kept deliberately separate from `skillGroups`. The former
  * lists only capabilities a reader can verify by looking at this repository, and
@@ -16,28 +22,28 @@
 export const about = {
   /** Two or three paragraphs in first person. */
   bio: [
-    "I am a final-year Bachelor of Computing Science (Honours) student at UTS, currently a software engineer intern at AIIDA in Sydney. I build backend systems — RESTful APIs and services in Python, FastAPI and Node.js, backed by relational data models in PostgreSQL — and I take them the whole way through the lifecycle, from design to test to a deployed release.",
-    "I came to engineering through the full stack rather than a single layer, which is why the security side of the work holds my attention as much as the building does. Designing a schema, deciding what not to store, working out which cookie attribute defends against which attack: those turn out to be the same kind of problem as making a query fast or an API predictable. This site is where I do that work in the open — the analytics platform behind it is mine, and so are the hardening decisions documented alongside it.",
-    "I am AWS Certified, working through the CCNA, and looking for graduate software engineering work where backend development, cloud deployment and security are part of one role rather than three separate teams.",
+    "I am a cyber security analyst intern at AIIDA and a final-year Bachelor of Computing Science (Honours) student at UTS. My work sits across SOC operations, threat monitoring and network security analysis — vulnerability assessments, SIEM monitoring, incident triage and endpoint investigation, alongside cloud security controls in Microsoft Entra ID and Azure.",
+    "Most of what I know I learned by building something and then attacking it. I wrote a Python network intrusion detection system to understand what a port scan actually looks like in a packet stream; I stood up a Splunk SOC lab to find out what a detection rule costs to tune; I built a phishing simulation game because spotting a lure in an inbox is a different skill from spotting one on a slide. This site is part of the same habit — the analytics platform behind it is mine, and so are the hardening decisions documented in the open.",
+    "I am AWS Certified, working through the CCNA, and looking for graduate cyber security and SOC analyst work where detection, investigation and the systems being defended are all part of one job.",
   ],
 
   /** Short factual rows shown beside the bio. */
   facts: [
-    { label: "Focus", value: "Backend engineering, cloud deployment, security engineering" },
-    { label: "Location", value: "Sydney, NSW, Australia" },
-    { label: "Currently", value: "Software Engineer Intern at AIIDA · Final-year BCompSci (Hons), UTS" },
-    { label: "Looking for", value: "Graduate software engineering roles" },
+    { label: "Focus", value: "SOC operations, threat detection, cloud security" },
+    { label: "Location", value: "Greater Sydney Area, Australia" },
+    { label: "Currently", value: "Cyber Security Analyst Intern at AIIDA · Final-year BCompSci (Hons), UTS" },
+    { label: "Looking for", value: "Graduate cyber security and SOC analyst roles" },
   ],
 
   /**
-   * Technical convictions. Drafted from the work in this repository and the
-   * résumé — worth reading through and rewording into your own voice.
+   * Technical convictions. Drawn from the detection and hardening work in these
+   * projects — worth rewording into your own voice.
    */
   principles: [
+    "A single log line means nothing. Detection lives in the pattern across events from one source, which is why a rule needs a time window rather than a threshold on one entry.",
     "Privacy decisions are mostly schema decisions. Choosing not to store a column is a far stronger control than choosing not to look at it.",
-    "An exemption you can explain is fine; an exemption you inherited is a finding. That holds for a CSP directive, a database grant and a dependency alike.",
-    "Automate the workflow you have done by hand three times. A lot of the leverage on an engineering team sits in the scripts nobody asked for.",
-    "Code is read far more often than it is written, and documented far less often than it should be. Both are part of shipping, not something that happens after.",
+    "An exemption you can explain is fine; an exemption you inherited is a finding. That holds for a CSP directive, a firewall rule and a database grant alike.",
+    "Build the thing before you defend it. Writing the detector is what surfaces the questions that reading about detection never does.",
   ],
 };
 
@@ -45,52 +51,130 @@ export const about = {
 
 export const experience = [
   {
-    role: "Software Engineer Intern",
+    role: "Cyber Security Analyst Intern",
     organisation: "AIIDA",
     period: "Apr 2026 – present",
-    location: "Sydney, NSW",
+    location: "New South Wales, on-site",
     summary:
-      "Backend engineering across the full software development lifecycle — API design and development through to testing, deployment and production support.",
+      "Security analysis and cloud security work across client environments and the company's own products, in a multidisciplinary consulting team.",
     highlights: [
-      "Designed and built RESTful APIs and backend services in Python, FastAPI and Node.js, taking features from design through development, integration and test to release.",
-      "Deployed and maintained applications on Vercel using CI/CD-style workflows, shipping reliable releases to production.",
-      "Designed and managed relational data models in PostgreSQL, writing optimised SQL for application storage, retrieval and reporting.",
-      "Wrote automation tooling and scripts in Python and Bash to streamline engineering workflows and remove repeated manual work.",
-      "Collaborated with senior consultants in a multidisciplinary team, documenting work in structured technical writing pitched at both technical and non-technical stakeholders.",
-    ],
-    stack: ["Python", "FastAPI", "Node.js", "PostgreSQL", "SQL", "Bash", "Vercel", "CI/CD", "Git"],
-  },
-  {
-    role: "Oncology Medical Secretary",
-    organisation: "NSW Health",
-    period: "Feb 2025 – Apr 2026",
-    location: "Sydney, NSW",
-    summary:
-      "Senior administrative support inside a large clinical organisation operating under strict governance, confidentiality and data-handling requirements.",
-    highlights: [
-      "Worked with sensitive patient information under formal confidentiality and data-handling obligations — the practical version of the least-privilege and access-control reasoning I now apply to systems.",
-      "Coordinated across internal clinical teams and external stakeholders, keeping records accurate in a high-volume environment where an error has real consequences.",
-      "Produced professional reports and correspondence for senior clinicians, to the standards of a governance-heavy organisation.",
+      "Assisted with vulnerability assessments, cyber security client proposals and Business Continuity Planning to support client security and resilience.",
+      "Implemented Microsoft Entra ID security controls and managed Azure Backup deployments across multiple client environments, including backup validation and recovery testing.",
+      "Conducted internal security testing and vulnerability assessments on company products, identifying risks and contributing to remediation.",
+      "Worked to Zero Trust and least-privilege principles across client and internal environments.",
+      "Built RESTful APIs and backend services in Python, FastAPI and Node.js, with relational data models and optimised SQL in PostgreSQL, deployed to Vercel through CI/CD-style workflows.",
+      "Wrote automation tooling in Python and Bash, and documented work in structured technical writing for both technical and non-technical stakeholders.",
     ],
     stack: [
-      "Governance & compliance",
+      "Microsoft Entra ID",
+      "Azure Backup",
+      "Zero Trust",
+      "Essential Eight",
+      "Vulnerability assessment",
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+    ],
+  },
+  {
+    role: "Cyber Security Analyst — self-directed projects",
+    organisation: "Self-employed",
+    period: "Apr 2024 – May 2026",
+    location: "New South Wales",
+    summary:
+      "Self-directed security engineering: building detection tooling and awareness training, testing it, and publishing the write-ups.",
+    highlights: [
+      "Developed a Python network intrusion detection system that monitors live traffic and detects port scans, traffic spikes and high-risk connections.",
+      "Built a phishing simulation game to improve user awareness of social-engineering threats.",
+      "Developed Python tooling to automate processes and simulate real-world security scenarios.",
+      "Designed systems with secure authentication logic and considered data-handling practices.",
+      "Applied network monitoring techniques and analysed traffic patterns with Wireshark.",
+    ],
+    stack: ["Python", "Scapy", "Wireshark", "Sysmon", "Splunk", "Godot", "SQLite"],
+  },
+  {
+    role: "Medical Secretary",
+    organisation: "NSW Government",
+    period: "Feb 2025 – Apr 2026",
+    location: "New South Wales, on-site",
+    summary:
+      "High-level secretarial and administrative support in the Cancer Genetics Department at the Cancer Therapy Centre.",
+    highlights: [
+      "Supported coordination of patient care and clinical services, managing complex diaries, meetings, agendas and minutes.",
+      "Produced professional reports and presentations to the standard of a governance-heavy organisation.",
+      "Acted as a point of contact for patients and carers in a sensitive oncology environment under strict confidentiality obligations — the practical version of the access-control and least-privilege reasoning I now apply to systems.",
+      "Collaborated with medical, nursing, allied health and IT teams, liaising across internal and external stakeholders.",
+    ],
+    stack: [
       "Confidential data handling",
+      "Governance & compliance",
       "Stakeholder coordination",
       "Technical reporting",
     ],
   },
   {
-    role: "Software Developer Intern",
+    role: "Safety Coordinator — Amazon",
+    organisation: "Adecco",
+    period: "Sep 2024 – Feb 2025",
+    location: "New South Wales, on-site",
+    summary:
+      "Workplace health and safety auditing on an Amazon site: inspections, risk assessment and corrective action.",
+    highlights: [
+      "Conducted regular safety audits and inspections against workplace health and safety regulations and internal standards.",
+      "Identified hazards, assessed risk and implemented corrective actions to prevent incidents.",
+      "Supported incident investigations and maintained accurate documentation and reporting of audit findings.",
+      "Worked with cross-functional teams on continuous improvement of a safe and compliant operating environment.",
+    ],
+    stack: ["Auditing", "Risk assessment", "Incident investigation", "Compliance reporting"],
+  },
+  {
+    role: "Software Engineer Intern",
     organisation: "AEK Media",
     period: "Mar 2024 – May 2024",
-    location: "Sydney, NSW",
+    location: "New South Wales, on-site",
     summary:
-      "Built and shipped AI chatbot applications that automated customer service workflows in a live production environment.",
+      "Part-time internship spanning application development and network security work in a live production environment.",
     highlights: [
-      "Developed and deployed AI chatbot applications to automate customer service workflows, running against real users rather than a staging dataset.",
-      "Designed and integrated backend data storage on SQL databases, contributing to a scalable and maintainable application architecture.",
+      "Designed and deployed AI-powered chatbots to automate customer enquiries, integrating SQL databases for storage and management.",
+      "Contributed to security measures across systems and networks, including firewall configuration to protect digital assets.",
+      "Analysed network traffic with Wireshark to identify potential threats and monitor data flow.",
+      "Worked with senior developers to identify system vulnerabilities and recommend practical improvements.",
     ],
-    stack: ["AI chatbots", "SQL databases", "Backend integration", "Production deployment"],
+    stack: ["AI chatbots", "SQL databases", "Wireshark", "Firewalls", "Network security"],
+  },
+];
+
+/* ----------------------------------------------------------- achievements -- */
+
+/**
+ * Recognitions and competition results.
+ *
+ * Each entry states plainly what happened and who was involved. The NASA
+ * disclosure in particular is worded as what it was — a team effort at AIIDA
+ * that Sahil was named in — because overstating an individual role in a
+ * coordinated disclosure would be both inaccurate and trivially checkable.
+ */
+export const achievements = [
+  {
+    title: "NASA vulnerability disclosure",
+    issuer: "AIIDA — team recognition",
+    date: "2026",
+    detail:
+      "Named as part of the AIIDA cyber security team that identified and responsibly disclosed critical vulnerabilities on NASA's official website, and received official recognition for the disclosure. Supporting documentation is not public, under the responsible-disclosure and confidentiality terms of the engagement.",
+  },
+  {
+    title: "Hack The Box Cyber Apocalypse CTF 2026",
+    issuer: "Hack The Box",
+    date: "2026",
+    detail:
+      "Finished 698th of 6,744 teams — the top 10% globally — solving 58 challenges, competing as a pair.",
+  },
+  {
+    title: "Best Team Player of the Month",
+    issuer: "AIIDA",
+    date: "2026",
+    detail:
+      "Recognised by AIIDA for contribution to the team during the cyber security internship.",
   },
 ];
 
@@ -144,36 +228,54 @@ export const evidencedSkills = [
 ];
 
 /**
- * The wider toolkit — from work and study beyond this repository.
+ * The wider toolkit — from work, study and self-directed projects beyond this
+ * repository.
  */
 export const skillGroups = [
   {
-    group: "Languages",
-    items: ["Python", "SQL", "JavaScript (Node.js)", "Bash scripting"],
-  },
-  {
-    group: "Frameworks & backend",
+    group: "Security operations",
     items: [
-      "FastAPI",
-      "Node.js",
-      "RESTful API design & development",
-      "Automation tooling",
-      "Integration & test",
+      "SOC operations",
+      "SIEM monitoring",
+      "Incident triage",
+      "Endpoint analysis",
+      "Threat detection",
+      "Detection engineering",
+      "Alert tuning & validation",
     ],
   },
   {
-    group: "Databases",
+    group: "Security tooling",
+    items: ["Splunk Enterprise", "Sysmon", "Wireshark", "Nmap", "Burp Suite", "Scapy"],
+  },
+  {
+    group: "Frameworks & methodology",
     items: [
-      "PostgreSQL",
-      "Relational data modelling",
-      "Query optimisation",
-      "Data cleaning & modelling",
+      "MITRE ATT&CK",
+      "Cyber Kill Chain",
+      "Essential Eight",
+      "Zero Trust",
+      "Principle of Least Privilege",
+      "Vulnerability assessment",
+      "Business Continuity Planning",
     ],
   },
   {
-    group: "Cloud & deployment",
+    group: "Networking",
+    items: [
+      "TCP/IP",
+      "Network traffic analysis",
+      "Port scanning & detection",
+      "Firewalls",
+      "Windows Event Logs",
+    ],
+  },
+  {
+    group: "Cloud & infrastructure",
     items: [
       "AWS (certified)",
+      "Microsoft Entra ID",
+      "Azure Backup",
       "Vercel",
       "CI/CD workflows",
       "Linux & Windows environments",
@@ -181,16 +283,18 @@ export const skillGroups = [
     ],
   },
   {
-    group: "Developer tools",
-    items: ["Git version control", "Claude Code (AI-assisted development)", "Android Studio", "Xcode"],
+    group: "Languages",
+    items: ["Python", "SQL", "JavaScript (Node.js)", "Bash scripting", "GDScript"],
   },
   {
-    group: "Software practice",
+    group: "Development",
     items: [
-      "Full software development lifecycle",
-      "Scalability & performance",
-      "Maintainable, testable code",
-      "Technical documentation",
+      "FastAPI",
+      "Node.js",
+      "RESTful API design & development",
+      "PostgreSQL",
+      "Relational data modelling",
+      "Git version control",
     ],
   },
   {
@@ -199,8 +303,8 @@ export const skillGroups = [
       "Analytical thinking",
       "Problem solving",
       "Stakeholder communication",
+      "Technical documentation",
       "Cross-functional collaboration",
-      "Adaptability",
     ],
   },
 ];

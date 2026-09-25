@@ -13,6 +13,7 @@ const SITE_ROUTES = [
   { path: "/projects",                  indexable: true,  changefreq: "weekly",  priority: "0.9" },
   { path: "/projects/phishsafe",        indexable: true,  changefreq: "monthly", priority: "0.9" },
   { path: "/projects/network-intrusion-detection", indexable: true, changefreq: "monthly", priority: "0.9" },
+  { path: "/projects/splunk-soc-lab",    indexable: true,  changefreq: "monthly", priority: "0.9" },
   { path: "/projects/sysmon-reconnaissance-detection", indexable: true, changefreq: "monthly", priority: "0.9" },
   { path: "/projects/threatscope",      indexable: true,  changefreq: "monthly", priority: "0.9" },
   { path: "/projects/portfolio-analytics", indexable: true, changefreq: "monthly", priority: "0.8" },

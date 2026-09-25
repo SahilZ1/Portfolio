@@ -25,7 +25,7 @@ export const site = {
   lastName: "Zagade",
 
   /** Shown under the name in the hero, revealed one at a time. */
-  disciplines: ["Software Engineering", "Cloud", "Security"],
+  disciplines: ["Cyber Security", "Cloud", "Detection Engineering"],
 
   /** The one-line positioning statement. */
   statement: "I build, secure and analyse systems.",
@@ -35,24 +35,24 @@ export const site = {
    * is verifiable by anyone reading the source — no claims beyond that.
    */
   intro:
-    "Final-year Computing Science (Honours) student at UTS and software engineer intern at AIIDA, building backend services in Python, FastAPI, Node.js and PostgreSQL. This site is the evidence: it runs on an Express and PostgreSQL backend I wrote, with a first-party analytics platform behind it — anonymous visitor tracking, session reconstruction, traffic-flow analysis and a private console — designed with the privacy and hardening decisions documented in the open.",
+    "Cyber security analyst intern at AIIDA and final-year Computing Science (Honours) student at UTS, working across SOC operations, threat detection and cloud security. This site is the evidence: it runs on an Express and PostgreSQL backend I wrote, with a first-party analytics platform behind it — anonymous visitor tracking, session reconstruction, traffic-flow analysis and a private console — designed with the privacy and hardening decisions documented in the open.",
 
   location: "Sydney, NSW, Australia",
   availability:
-    "Final-year student at UTS, open to graduate software engineering roles in Sydney.",
+    "Final-year student at UTS, open to graduate cyber security and SOC analyst roles in Sydney.",
 
   links: {
     github: "https://github.com/SahilZ1",
-    linkedin: TODO("https://www.linkedin.com/in/your-profile — add your LinkedIn URL here"),
+    linkedin: "https://www.linkedin.com/in/sahil-zagade-03a874258",
     email: "sahil.zagade21@gmail.com",
     resume: "/Sahil-Zagade-Resume.docx",
   },
 
   seo: {
     titleTemplate: "%s · Sahil Zagade",
-    defaultTitle: "Sahil Zagade · Software Engineer",
+    defaultTitle: "Sahil Zagade · Cyber Security Analyst",
     description:
-      "Portfolio of Sahil Zagade — graduate software engineer in Sydney. Backend development in Python, FastAPI, Node.js and PostgreSQL, AWS certified, with a hands-on Cyber Lab and a custom-built first-party analytics platform.",
+      "Portfolio of Sahil Zagade — cyber security analyst in Sydney. SOC operations, threat detection and cloud security, with SIEM and endpoint detection projects, a hands-on Cyber Lab and a custom-built first-party analytics platform.",
     /**
      * Deployed origin, used for canonical URLs and OpenGraph.
      *

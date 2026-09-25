@@ -2,7 +2,7 @@ import { Seo } from "../components/Seo.jsx";
 import { PageHeader } from "../components/PageHeader.jsx";
 import { Reveal, RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import { Text } from "../components/Todo.jsx";
-import { about } from "../content/profile.js";
+import { about, achievements } from "../content/profile.js";
 import { site } from "../content/site.js";
 
 export default function About() {
@@ -40,6 +40,28 @@ export default function About() {
       </section>
 
       <section className="section section--tint">
+        <div className="shell shell--wide">
+          <Reveal>
+            <p className="eyebrow">Recognition</p>
+            <h2 className="title-l">Achievements</h2>
+          </Reveal>
+
+          <RevealGroup className="grid grid--cards achievements__grid" gap={0.08}>
+            {achievements.map((achievement) => (
+              <RevealItem key={achievement.title} className="card achievement">
+                <div className="achievement__head">
+                  <h3 className="title-s achievement__title">{achievement.title}</h3>
+                  <span className="tag">{achievement.date}</span>
+                </div>
+                <p className="achievement__issuer brand-text">{achievement.issuer}</p>
+                <p className="muted achievement__detail">{achievement.detail}</p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      <section className="section">
         <div className="shell shell--wide">
           <Reveal>
             <p className="eyebrow">How I work</p>
