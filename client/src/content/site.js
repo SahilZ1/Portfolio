@@ -45,7 +45,6 @@ export const site = {
     github: "https://github.com/SahilZ1",
     linkedin: "https://www.linkedin.com/in/sahil-zagade-03a874258",
     email: "sahil.zagade21@gmail.com",
-    resume: "/Sahil-Zagade-Resume.docx",
   },
 
   seo: {

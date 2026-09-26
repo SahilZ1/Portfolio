@@ -44,7 +44,7 @@ function CopyEmail({ email }) {
 }
 
 export default function Contact() {
-  const { email, linkedin, github, resume } = site.links;
+  const { email, linkedin, github } = site.links;
 
   return (
     <>
@@ -137,27 +137,6 @@ export default function Contact() {
               )}
             </RevealItem>
 
-            <RevealItem className="card contact__card">
-              <span className="contact__label">Résumé</span>
-              {isReal(resume) ? (
-                <>
-                  <span className="contact__value">Download a copy</span>
-                  <div className="contact__actions">
-                    <a
-                      href={resume}
-                      className="btn btn--small"
-                      download
-                      onClick={() => analytics.trackEvent("resume_download")}
-                    >
-                      Download résumé
-                      <span className="btn__arrow" aria-hidden="true">↓</span>
-                    </a>
-                  </div>
-                </>
-              ) : (
-                <Todo hint={resume.hint} />
-              )}
-            </RevealItem>
           </RevealGroup>
 
           <Reveal delay={0.1}>

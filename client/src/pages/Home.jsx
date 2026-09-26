@@ -302,8 +302,8 @@ function Capabilities() {
     <section className="section section--tint">
       <div className="shell shell--wide">
         <Reveal>
-          <p className="eyebrow">Demonstrated in this repository</p>
-          <h2 className="title-xl">What the code shows</h2>
+          <p className="eyebrow">Demonstrated in published work</p>
+          <h2 className="title-xl">What the projects show</h2>
         </Reveal>
 
         <RevealGroup className="grid grid--cards capabilities__grid" gap={0.07}>

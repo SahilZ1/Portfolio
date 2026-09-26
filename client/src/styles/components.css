@@ -1797,3 +1797,26 @@ a.contact__value { border-bottom: 2px solid var(--brand); align-self: flex-start
   font-size: var(--step--1);
   color: var(--muted);
 }
+
+/* ------------------------------------------- skills: certifications band -- */
+/* A compact strip on the Skills page. Held certifications only — anything in
+   progress stays on /certifications, where its status is shown in full. */
+
+.certs-strip { margin-block: var(--space-6); }
+
+.certs-strip__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.certs-strip__badge {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  background: var(--brand);
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+}
+
+.certs-strip__name { margin: 0; }
+.certs-strip__issuer { margin: 0; font-size: var(--step--1); }

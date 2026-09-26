@@ -64,7 +64,7 @@ const COLLECTED = [
     group: "Event",
     purpose: "Knowing which links and buttons get used.",
     fields: [
-      ["Event type", "From a fixed list — outbound click, CTA press, résumé download, and similar."],
+      ["Event type", "From a fixed list — outbound click, CTA press, project view, and similar."],
       ["Page path", "Where on this site the interaction happened."],
       ["Small metadata object", "For an outbound click, only the destination hostname — never the full URL."],
     ],

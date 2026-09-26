@@ -13,8 +13,8 @@
  * carrying both is more complete than picking one and quietly dropping the rest.
  *
  * `evidencedSkills` is kept deliberately separate from `skillGroups`. The former
- * lists only capabilities a reader can verify by looking at this repository, and
- * the page labels them as such. The latter is experience from elsewhere.
+ * lists only capabilities a reader can verify by looking at a published project,
+ * and each entry names which one. The latter is experience from elsewhere.
  */
 
 /* ------------------------------------------------------------------ about -- */
@@ -24,7 +24,7 @@ export const about = {
   bio: [
     "I am a cyber security analyst intern at AIIDA and a final-year Bachelor of Computing Science (Honours) student at UTS. My work sits across SOC operations, threat monitoring and network security analysis — vulnerability assessments, SIEM monitoring, incident triage and endpoint investigation, alongside cloud security controls in Microsoft Entra ID and Azure.",
     "Most of what I know I learned by building something and then attacking it. I wrote a Python network intrusion detection system to understand what a port scan actually looks like in a packet stream; I stood up a Splunk SOC lab to find out what a detection rule costs to tune; I built a phishing simulation game because spotting a lure in an inbox is a different skill from spotting one on a slide. This site is part of the same habit — the analytics platform behind it is mine, and so are the hardening decisions documented in the open.",
-    "I am AWS Certified, working through the CCNA, and looking for graduate cyber security and SOC analyst work where detection, investigation and the systems being defended are all part of one job.",
+    "I hold the AWS Certified Cloud Practitioner and Microsoft SC-900 certifications, am working through the CCNA, and am looking for graduate cyber security and SOC analyst work where detection, investigation and the systems being defended are all part of one job.",
   ],
 
   /** Short factual rows shown beside the bio. */
@@ -181,39 +181,43 @@ export const achievements = [
 /* ----------------------------------------------------------------- skills -- */
 
 /**
- * Skills demonstrated by this repository.
+ * Skills demonstrated by published work.
  *
- * Every entry here is checkable against the source, which is why they are
- * presented separately and labelled as evidenced. Nothing in this list is a
- * claim about experience elsewhere.
+ * Every entry names the project that evidences it, and every one of those
+ * projects is public — this site, the NIDS, the Splunk SOC lab and the Sysmon
+ * detection write-up. That is the point of keeping this list separate from
+ * `skillGroups`: these are checkable, and the page says so.
+ *
+ * The Splunk SOC lab is the one project here with no repository of its own; it
+ * is evidenced by its case study on this site rather than by source.
  */
 export const evidencedSkills = [
   {
-    group: "Backend engineering",
+    group: "Cybersecurity",
     items: [
-      { name: "Node.js & Express 5", evidence: "Layered API: config, middleware, routes, services" },
-      { name: "PostgreSQL", evidence: "Schema design, indexing strategy, forward-only migrations" },
+      { name: "Network intrusion detection", evidence: "NIDS — sliding-window port-scan, traffic-spike and high-risk-port rules in Python and Scapy" },
+      { name: "Packet capture & traffic analysis", evidence: "NIDS — live interface capture and offline PCAP analysis, verified alongside Wireshark" },
+      { name: "SIEM engineering", evidence: "Splunk SOC lab — seven detections built over Windows Event Logs and Sysmon" },
+      { name: "Endpoint detection & telemetry", evidence: "Sysmon Event ID 3 used to reconstruct an Nmap port scan end to end" },
+      { name: "Alert tuning & validation", evidence: "Detections fired deliberately to confirm them; per-source cooldown suppresses duplicate alerts" },
+      { name: "MITRE ATT&CK mapping", evidence: "Reconnaissance activity mapped to T1046, Network Service Discovery" },
+      { name: "Content Security Policy", evidence: "This site — strict policy with no script-src exemptions" },
+      { name: "Authentication hardening", evidence: "This site — bcrypt, lockout, timing-safe failure paths, session regeneration" },
+      { name: "CSRF & session security", evidence: "This site — SameSite=Strict plus double-submit tokens" },
+      { name: "Input validation", evidence: "This site — schema validation and normalisation on every untrusted ingest path" },
+    ],
+  },
+  {
+    group: "Full-stack engineering",
+    items: [
+      { name: "Node.js & Express 5", evidence: "This site — layered API: config, middleware, routes, services" },
+      { name: "PostgreSQL", evidence: "This site — schema design, indexing strategy, forward-only migrations" },
       { name: "SQL", evidence: "Window-free aggregation, CTEs, generate_series time series, GIN-indexed JSONB" },
       { name: "REST API design", evidence: "Versionless resource endpoints with bounded, validated query parameters" },
-    ],
-  },
-  {
-    group: "Application security",
-    items: [
-      { name: "Content Security Policy", evidence: "Strict policy with no script-src exemptions" },
-      { name: "Authentication", evidence: "bcrypt, lockout, timing-safe failure paths, session regeneration" },
-      { name: "CSRF & session security", evidence: "SameSite=Strict plus double-submit tokens" },
-      { name: "Input validation", evidence: "Schema validation and normalisation on every untrusted ingest path" },
-      { name: "Secure logging", evidence: "Key-based secret redaction and identifier truncation" },
-    ],
-  },
-  {
-    group: "Frontend engineering",
-    items: [
       { name: "React 19", evidence: "Routed SPA with reusable components and no state library" },
-      { name: "Animation", evidence: "Transform/opacity-only motion, reduced-motion honoured throughout" },
       { name: "Accessibility", evidence: "Semantic landmarks, focus management, contrast-checked palette" },
       { name: "Data visualisation", evidence: "Hand-built SVG chart primitives including a flow diagram" },
+      { name: "Python & Godot", evidence: "NIDS CLI and SQLite store in Python; PhishSafe built in Godot with GDScript" },
     ],
   },
   {
@@ -222,6 +226,7 @@ export const evidencedSkills = [
       { name: "Analytics modelling", evidence: "Visitor / session / page-view / event model with journey reconstruction" },
       { name: "Privacy by design", evidence: "No fingerprinting, no raw IPs, UA discarded after classification" },
       { name: "Data retention", evidence: "Documented window enforced by a scheduled prune job" },
+      { name: "Secure logging", evidence: "Key-based secret redaction and identifier truncation" },
       { name: "AI integration", evidence: "Provider abstraction with aggregate-only boundary and output verification" },
     ],
   },
@@ -316,6 +321,11 @@ export const certifications = [
     name: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
     date: "April 2026",
+    status: "Held",
+  },
+  {
+    name: "Microsoft Certified: Security, Compliance, and Identity Fundamentals (SC-900)",
+    issuer: "Microsoft",
     status: "Held",
   },
   {

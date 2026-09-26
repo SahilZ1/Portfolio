@@ -2,7 +2,8 @@ import { Seo } from "../components/Seo.jsx";
 import { PageHeader } from "../components/PageHeader.jsx";
 import { Reveal, RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import { Text } from "../components/Todo.jsx";
-import { evidencedSkills, skillGroups } from "../content/profile.js";
+import { Link } from "react-router-dom";
+import { evidencedSkills, skillGroups, certifications } from "../content/profile.js";
 
 /**
  * Skills, split into two clearly distinguished halves.
@@ -23,7 +24,7 @@ export default function Skills() {
       <PageHeader
         eyebrow="Skills"
         title="What I can do, and how you can check"
-        lede="The first group is demonstrable by reading the source of this site. The second is experience from elsewhere."
+        lede="The first group is demonstrable by reading the projects behind it. The second is experience from elsewhere."
       />
 
       <section className="section">
@@ -32,8 +33,9 @@ export default function Skills() {
             <div className="skills__banner">
               <span className="skills__banner-mark" aria-hidden="true" />
               <p>
-                <strong>Evidenced by this repository.</strong> Every item below corresponds to code
-                you can read in the source of this site.
+                <strong>Evidenced by published work.</strong> Every item below names the project
+                that demonstrates it — this site, the network intrusion detection system, the
+                Splunk SOC lab or the Sysmon detection write-up. All of them are public.
               </p>
             </div>
           </Reveal>
@@ -59,7 +61,7 @@ export default function Skills() {
       <section className="section section--tint">
         <div className="shell shell--wide">
           <Reveal>
-            <p className="eyebrow">Beyond this repository</p>
+            <p className="eyebrow">Beyond the published work</p>
             <h2 className="title-l">Wider toolkit</h2>
           </Reveal>
 
@@ -77,6 +79,34 @@ export default function Skills() {
               </RevealItem>
             ))}
           </RevealGroup>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="shell shell--wide">
+          <Reveal>
+            <p className="eyebrow">Certified</p>
+            <h2 className="title-l">Certifications</h2>
+          </Reveal>
+
+          <RevealGroup className="grid grid--cards certs-strip" gap={0.06}>
+            {certifications
+              .filter((certification) => certification.status === "Held")
+              .map((certification) => (
+                <RevealItem key={certification.name} className="card certs-strip__item">
+                  <span className="certs-strip__badge" aria-hidden="true" />
+                  <h3 className="title-s certs-strip__name">{certification.name}</h3>
+                  <p className="muted certs-strip__issuer">{certification.issuer}</p>
+                </RevealItem>
+              ))}
+          </RevealGroup>
+
+          <Reveal delay={0.08}>
+            <Link to="/certifications" className="btn btn--secondary">
+              All certifications
+              <span className="btn__arrow" aria-hidden="true">→</span>
+            </Link>
+          </Reveal>
         </div>
       </section>
     </>
