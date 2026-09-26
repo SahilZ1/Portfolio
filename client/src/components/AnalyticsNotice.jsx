@@ -95,7 +95,7 @@ export function AnalyticsNotice() {
             <>
               <div className="notice__body">
                 <p className="notice__text">
-                  This site uses its own analytics — one first-party cookie holding a random
+                  This site uses its own analytics. One first-party cookie holding a random
                   identifier, so visits can be counted. No third-party trackers, no profiling,
                   nothing shared.
                 </p>

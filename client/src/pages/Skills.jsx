@@ -8,10 +8,14 @@ import { evidencedSkills, skillGroups, certifications } from "../content/profile
 /**
  * Skills, split into two clearly distinguished halves.
  *
- * The distinction is the point: "demonstrated in this repository" is a
- * verifiable claim a reader can check against the source, and mixing it with
- * self-reported experience would dilute both. Presenting them separately is
- * more honest and, for a technical reader, more persuasive.
+ * The distinction is the point. "Demonstrated in published work" is a claim a
+ * reader can check against the source, and mixing it with self-reported
+ * experience would dilute both. Keeping them apart is more honest and, for a
+ * technical reader, more persuasive.
+ *
+ * Both halves are three groups, and `.skills__grid` pins them to three equal
+ * columns rather than letting an auto-fit grid strand one card on its own row
+ * at double the width of its neighbours.
  */
 export default function Skills() {
   return (
@@ -19,12 +23,12 @@ export default function Skills() {
       <Seo
         title="Skills"
         path="/skills"
-        description="Technical skills across security engineering, backend development, data and privacy engineering — with the subset evidenced by this repository marked as such."
+        description="Technical skills across security engineering, backend development, and data and privacy engineering, with the subset evidenced by published work marked as such."
       />
       <PageHeader
         eyebrow="Skills"
         title="What I can do, and how you can check"
-        lede="The first group is demonstrable by reading the projects behind it. The second is experience from elsewhere."
+        lede="The first set you can check by reading the projects behind it. The second is experience from everywhere else."
       />
 
       <section className="section">
@@ -34,13 +38,13 @@ export default function Skills() {
               <span className="skills__banner-mark" aria-hidden="true" />
               <p>
                 <strong>Evidenced by published work.</strong> Every item below names the project
-                that demonstrates it — this site, the network intrusion detection system, the
+                that demonstrates it: this site, the network intrusion detection system, the
                 Splunk SOC lab or the Sysmon detection write-up. All of them are public.
               </p>
             </div>
           </Reveal>
 
-          <RevealGroup className="grid grid--cards skills__grid" gap={0.07}>
+          <RevealGroup className="grid skills__grid" gap={0.07}>
             {evidencedSkills.map((group) => (
               <RevealItem key={group.group} className="card skills__card">
                 <h2 className="skills__group">{group.group}</h2>
@@ -65,7 +69,7 @@ export default function Skills() {
             <h2 className="title-l">Wider toolkit</h2>
           </Reveal>
 
-          <RevealGroup className="grid grid--cards skills__grid" gap={0.07}>
+          <RevealGroup className="grid skills__grid" gap={0.07}>
             {skillGroups.map((group) => (
               <RevealItem key={group.group} className="card skills__card">
                 <h3 className="skills__group">{group.group}</h3>

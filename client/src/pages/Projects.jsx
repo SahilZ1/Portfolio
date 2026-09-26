@@ -19,7 +19,7 @@ export default function Projects() {
       <PageHeader
         eyebrow="Projects"
         title="Case studies, not thumbnails"
-        lede="Each project is written up properly — the problem, how it is built, the security decisions taken and what they cost."
+        lede="Each project is written up properly: the problem, how it is built, the security decisions taken and what they cost."
       />
 
       <section className="section">
@@ -41,7 +41,7 @@ export default function Projects() {
                   <span className="project-row__main">
                     <span className="project-row__head">
                       <h2 className="title-l project-row__name">{project.name}</h2>
-                      {project.draft && <span className="tag">Case study in progress</span>}
+                      {project.draft && <span className="tag">In progress</span>}
                     </span>
                     <span className="project-row__tagline muted">
                       <Text value={project.tagline} />
@@ -73,7 +73,7 @@ export default function Projects() {
               <p className="eyebrow">Also on GitHub</p>
               <h2 className="title-xl">Smaller repositories</h2>
               <p className="lede">
-                Utilities and coursework rather than case studies — listed honestly as what they
+                Utilities and coursework rather than case studies. Listed honestly as what they
                 are, with the source a click away.
               </p>
             </div>

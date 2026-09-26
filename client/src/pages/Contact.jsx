@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Seo } from "../components/Seo.jsx";
 import { PageHeader } from "../components/PageHeader.jsx";
-import { Reveal, RevealGroup, RevealItem } from "../components/Reveal.jsx";
+import { RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import { Text, isReal, Todo } from "../components/Todo.jsx";
 import { ExternalLink } from "../components/ExternalLink.jsx";
 import { site } from "../content/site.js";
@@ -10,14 +10,11 @@ import { analytics } from "../lib/analytics.js";
 /**
  * Contact page.
  *
- * Direct channels only — no contact form, deliberately.
- *
- * A form would mean accepting unauthenticated user-supplied text, storing or
- * relaying it, and defending a new endpoint against spam and abuse, all to
- * deliver a message that an email link delivers already. The correct security
- * decision for a personal site is to not build the attack surface. That
- * reasoning is stated on the page rather than left implicit, because on a
- * security portfolio the absence of a feature is worth explaining.
+ * Direct channels only, and no contact form on purpose. A form means accepting
+ * unauthenticated text from anyone, storing or relaying it, and then defending
+ * that endpoint against spam and abuse, all to deliver a message an email link
+ * already delivers. For a personal site the right call is not to build the
+ * attack surface in the first place.
  */
 
 function CopyEmail({ email }) {
@@ -77,6 +74,14 @@ export default function Contact() {
                     onClick={() => analytics.trackEvent("contact_click", { channel: "email" })}
                   >
                     {email}
+                  </a>
+                  <span className="contact__label contact__label--sub">Phone</span>
+                  <a
+                    href={`tel:${site.phone.replace(/\s+/g, "")}`}
+                    className="contact__value"
+                    onClick={() => analytics.trackEvent("contact_click", { channel: "phone" })}
+                  >
+                    {site.phone}
                   </a>
                   <div className="contact__actions">
                     <a
@@ -138,18 +143,6 @@ export default function Contact() {
             </RevealItem>
 
           </RevealGroup>
-
-          <Reveal delay={0.1}>
-            <aside className="contact__note">
-              <h2 className="title-s">Why there is no contact form</h2>
-              <p className="muted">
-                A form means accepting unauthenticated text from anyone, storing or relaying it,
-                and then defending that endpoint against spam and abuse — all to deliver a message
-                an email link already delivers. On a personal site the right security decision is
-                not to build the attack surface in the first place.
-              </p>
-            </aside>
-          </Reveal>
         </div>
       </section>
     </>

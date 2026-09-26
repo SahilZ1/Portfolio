@@ -4,13 +4,11 @@
  * ---------------------------------------------------------------------------
  * PLACEHOLDERS
  * ---------------------------------------------------------------------------
- * Anything marked with `TODO(` is a value that was not known when this site was
- * built and must be filled in by the site owner. Nothing about Sahil's history,
- * employers, dates, grades, certifications or metrics has been invented.
- *
- * Placeholders render with a visible dashed outline on the page (see the
- * `.todo` style) so they are impossible to ship by accident. Search the repo
- * for `TODO(` to find every one of them.
+ * No content file carries a placeholder any more: every value on the site is
+ * real. The `TODO` helper and the `.todo` style below are kept as the guard
+ * rail they were built to be. Wrapping a value in `TODO("hint")` renders it as
+ * a visible dashed outline rather than as text, so a half-written entry is
+ * impossible to ship by accident.
  * ---------------------------------------------------------------------------
  */
 
@@ -35,11 +33,12 @@ export const site = {
    * is verifiable by anyone reading the source — no claims beyond that.
    */
   intro:
-    "Cyber security analyst intern at AIIDA and final-year Computing Science (Honours) student at UTS, working across SOC operations, threat detection and cloud security. This site is the evidence: it runs on an Express and PostgreSQL backend I wrote, with a first-party analytics platform behind it — anonymous visitor tracking, session reconstruction, traffic-flow analysis and a private console — designed with the privacy and hardening decisions documented in the open.",
+    "I'm a cyber security analyst intern at AIIDA and a final-year Computing Science (Honours) student at UTS, working across SOC operations, threat detection and cloud security. This site is the evidence. It runs on an Express and PostgreSQL backend I wrote, and the analytics behind it are mine too: anonymous visitor tracking, session reconstruction, traffic-flow analysis and a private console. Every privacy and hardening decision that went into it is documented in the open.",
 
   location: "Sydney, NSW, Australia",
+  phone: "0470 627 048",
   availability:
-    "Final-year student at UTS, open to graduate cyber security and SOC analyst roles in Sydney.",
+    "Final-year student at UTS, looking for a junior cyber analyst or backend engineering role in Sydney.",
 
   links: {
     github: "https://github.com/SahilZ1",
@@ -51,7 +50,7 @@ export const site = {
     titleTemplate: "%s · Sahil Zagade",
     defaultTitle: "Sahil Zagade · Cyber Security Analyst",
     description:
-      "Portfolio of Sahil Zagade — cyber security analyst in Sydney. SOC operations, threat detection and cloud security, with SIEM and endpoint detection projects, a hands-on Cyber Lab and a custom-built first-party analytics platform.",
+      "Portfolio of Sahil Zagade, a cyber security analyst in Sydney working across SOC operations, threat detection and cloud security, with SIEM and endpoint detection projects and a first-party analytics platform built from scratch.",
     /**
      * Deployed origin, used for canonical URLs and OpenGraph.
      *
@@ -68,7 +67,6 @@ export const navigation = [
   { label: "About", path: "/about" },
   { label: "Experience", path: "/experience" },
   { label: "Projects", path: "/projects" },
-  { label: "Cyber Lab", path: "/lab" },
   { label: "Skills", path: "/skills" },
   { label: "Contact", path: "/contact" },
 ];

@@ -1,16 +1,16 @@
 /**
  * Experience, skills, certifications, achievements and education.
  *
- * Every factual claim in this file — employers, titles, dates, qualifications,
- * certifications and recognitions — comes from Sahil's own résumé and LinkedIn
+ * Every factual claim in this file (employers, titles, dates, qualifications,
+ * certifications and recognitions) comes from Sahil's own résumé and LinkedIn
  * profile. Nothing is inferred or embellished; where neither source carries a
  * number, the entry describes the work concretely rather than inventing a metric.
  *
- * Where the two sources describe the same role differently — the AIIDA
- * internship is titled "Software Engineer Intern" on the résumé and "Cyber
- * Security Analyst Intern" on LinkedIn — the LinkedIn title is used and the
- * duties from both are kept. They are Sahil's own accounts of one job, so
- * carrying both is more complete than picking one and quietly dropping the rest.
+ * The two sources describe the AIIDA internship differently: "Software Engineer
+ * Intern" on the résumé, "Cyber Security Analyst Intern" on LinkedIn. The
+ * LinkedIn title is used and the duties from both are kept. They are Sahil's own
+ * accounts of one job, so carrying both is more complete than picking one and
+ * quietly dropping the rest.
  *
  * `evidencedSkills` is kept deliberately separate from `skillGroups`. The former
  * lists only capabilities a reader can verify by looking at a published project,
@@ -22,9 +22,9 @@
 export const about = {
   /** Two or three paragraphs in first person. */
   bio: [
-    "I am a cyber security analyst intern at AIIDA and a final-year Bachelor of Computing Science (Honours) student at UTS. My work sits across SOC operations, threat monitoring and network security analysis — vulnerability assessments, SIEM monitoring, incident triage and endpoint investigation, alongside cloud security controls in Microsoft Entra ID and Azure.",
-    "Most of what I know I learned by building something and then attacking it. I wrote a Python network intrusion detection system to understand what a port scan actually looks like in a packet stream; I stood up a Splunk SOC lab to find out what a detection rule costs to tune; I built a phishing simulation game because spotting a lure in an inbox is a different skill from spotting one on a slide. This site is part of the same habit — the analytics platform behind it is mine, and so are the hardening decisions documented in the open.",
-    "I hold the AWS Certified Cloud Practitioner and Microsoft SC-900 certifications, am working through the CCNA, and am looking for graduate cyber security and SOC analyst work where detection, investigation and the systems being defended are all part of one job.",
+    "I am a cyber security analyst intern at AIIDA and a final-year Bachelor of Computing Science (Honours) student at UTS. My work sits across SOC operations, threat monitoring and network security analysis: vulnerability assessments, SIEM monitoring, incident triage and endpoint investigation, alongside cloud security controls in Microsoft Entra ID and Azure.",
+    "Most of what I know I learned by building something and then attacking it. I wrote a Python network intrusion detection system to understand what a port scan actually looks like in a packet stream. I stood up a Splunk SOC lab to find out what a detection rule costs to tune. I built a phishing simulation game because spotting a lure in an inbox is a different skill from spotting one on a slide. This site is part of the same habit: the analytics platform behind it is mine, and so are the hardening decisions documented in the open.",
+    "I hold the AWS Certified Cloud Practitioner and Microsoft SC-900 certifications and I am working through the CCNA. What I am looking for is a junior cyber analyst or backend engineering role where detection, investigation and the systems being defended are all part of one job.",
   ],
 
   /** Short factual rows shown beside the bio. */
@@ -32,18 +32,23 @@ export const about = {
     { label: "Focus", value: "SOC operations, threat detection, cloud security" },
     { label: "Location", value: "Greater Sydney Area, Australia" },
     { label: "Currently", value: "Cyber Security Analyst Intern at AIIDA · Final-year BCompSci (Hons), UTS" },
-    { label: "Looking for", value: "Graduate cyber security and SOC analyst roles" },
+    { label: "Looking for", value: "Junior Cyber Analyst / Backend Engineering" },
   ],
 
-  /**
-   * Technical convictions. Drawn from the detection and hardening work in these
-   * projects — worth rewording into your own voice.
-   */
+  /** How I work, in three. */
   principles: [
-    "A single log line means nothing. Detection lives in the pattern across events from one source, which is why a rule needs a time window rather than a threshold on one entry.",
-    "Privacy decisions are mostly schema decisions. Choosing not to store a column is a far stronger control than choosing not to look at it.",
-    "An exemption you can explain is fine; an exemption you inherited is a finding. That holds for a CSP directive, a firewall rule and a database grant alike.",
-    "Build the thing before you defend it. Writing the detector is what surfaces the questions that reading about detection never does.",
+    {
+      name: "Analytical thinking",
+      body: "A single log line means nothing. The answer lives in the pattern across events, so I look for the shape of the thing before I reach for a threshold. Building the detector is what surfaces the questions that reading about detection never does.",
+    },
+    {
+      name: "Stakeholder management",
+      body: "Most of a security finding's value is lost if the person who has to act on it cannot follow it. I learned that coordinating clinicians and IT teams in a hospital before I applied it to writing up a vulnerability, and I write for the reader rather than the reviewer.",
+    },
+    {
+      name: "Teamwork",
+      body: "Good security work is rarely done alone. I would rather hand over a clean set of notes and have someone else find the hole in my reasoning than be the only person who understands what I built.",
+    },
   ],
 };
 
@@ -77,7 +82,7 @@ export const experience = [
     ],
   },
   {
-    role: "Cyber Security Analyst — self-directed projects",
+    role: "Cyber Security Analyst (self-directed projects)",
     organisation: "Self-employed",
     period: "Apr 2024 – May 2026",
     location: "New South Wales",
@@ -102,7 +107,7 @@ export const experience = [
     highlights: [
       "Supported coordination of patient care and clinical services, managing complex diaries, meetings, agendas and minutes.",
       "Produced professional reports and presentations to the standard of a governance-heavy organisation.",
-      "Acted as a point of contact for patients and carers in a sensitive oncology environment under strict confidentiality obligations — the practical version of the access-control and least-privilege reasoning I now apply to systems.",
+      "Acted as a point of contact for patients and carers in a sensitive oncology environment under strict confidentiality obligations. It is the practical version of the access-control and least-privilege reasoning I now apply to systems.",
       "Collaborated with medical, nursing, allied health and IT teams, liaising across internal and external stakeholders.",
     ],
     stack: [
@@ -113,7 +118,7 @@ export const experience = [
     ],
   },
   {
-    role: "Safety Coordinator — Amazon",
+    role: "Safety Coordinator, Amazon site",
     organisation: "Adecco",
     period: "Sep 2024 – Feb 2025",
     location: "New South Wales, on-site",
@@ -129,7 +134,7 @@ export const experience = [
   },
   {
     role: "Software Engineer Intern",
-    organisation: "AEK Media",
+    organisation: "UTS Marketing Startup",
     period: "Mar 2024 – May 2024",
     location: "New South Wales, on-site",
     summary:
@@ -149,32 +154,23 @@ export const experience = [
 /**
  * Recognitions and competition results.
  *
- * Each entry states plainly what happened and who was involved. The NASA
- * disclosure in particular is worded as what it was — a team effort at AIIDA
- * that Sahil was named in — because overstating an individual role in a
- * coordinated disclosure would be both inaccurate and trivially checkable.
+ * Each entry states plainly what happened and who was involved, and nothing is
+ * listed here that could not be checked.
  */
 export const achievements = [
   {
-    title: "NASA vulnerability disclosure",
-    issuer: "AIIDA — team recognition",
+    title: "Best Team Player of the Month",
+    issuer: "AIIDA",
     date: "2026",
     detail:
-      "Named as part of the AIIDA cyber security team that identified and responsibly disclosed critical vulnerabilities on NASA's official website, and received official recognition for the disclosure. Supporting documentation is not public, under the responsible-disclosure and confidentiality terms of the engagement.",
+      "Recognised by AIIDA for my contribution to the team during the cyber security internship.",
   },
   {
     title: "Hack The Box Cyber Apocalypse CTF 2026",
     issuer: "Hack The Box",
     date: "2026",
     detail:
-      "Finished 698th of 6,744 teams — the top 10% globally — solving 58 challenges, competing as a pair.",
-  },
-  {
-    title: "Best Team Player of the Month",
-    issuer: "AIIDA",
-    date: "2026",
-    detail:
-      "Recognised by AIIDA for contribution to the team during the cyber security internship.",
+      "Finished 698th of 6,744 teams, in the top 10% globally, solving 58 challenges as a pair.",
   },
 ];
 
@@ -184,7 +180,7 @@ export const achievements = [
  * Skills demonstrated by published work.
  *
  * Every entry names the project that evidences it, and every one of those
- * projects is public — this site, the NIDS, the Splunk SOC lab and the Sysmon
+ * projects is public: this site, the NIDS, the Splunk SOC lab and the Sysmon
  * detection write-up. That is the point of keeping this list separate from
  * `skillGroups`: these are checkable, and the page says so.
  *
@@ -195,23 +191,23 @@ export const evidencedSkills = [
   {
     group: "Cybersecurity",
     items: [
-      { name: "Network intrusion detection", evidence: "NIDS — sliding-window port-scan, traffic-spike and high-risk-port rules in Python and Scapy" },
-      { name: "Packet capture & traffic analysis", evidence: "NIDS — live interface capture and offline PCAP analysis, verified alongside Wireshark" },
-      { name: "SIEM engineering", evidence: "Splunk SOC lab — seven detections built over Windows Event Logs and Sysmon" },
+      { name: "Network intrusion detection", evidence: "NIDS: sliding-window port-scan, traffic-spike and high-risk-port rules in Python and Scapy" },
+      { name: "Packet capture & traffic analysis", evidence: "NIDS: live interface capture and offline PCAP analysis, verified alongside Wireshark" },
+      { name: "SIEM engineering", evidence: "Splunk SOC lab: seven detections built over Windows Event Logs and Sysmon" },
       { name: "Endpoint detection & telemetry", evidence: "Sysmon Event ID 3 used to reconstruct an Nmap port scan end to end" },
       { name: "Alert tuning & validation", evidence: "Detections fired deliberately to confirm them; per-source cooldown suppresses duplicate alerts" },
       { name: "MITRE ATT&CK mapping", evidence: "Reconnaissance activity mapped to T1046, Network Service Discovery" },
-      { name: "Content Security Policy", evidence: "This site — strict policy with no script-src exemptions" },
-      { name: "Authentication hardening", evidence: "This site — bcrypt, lockout, timing-safe failure paths, session regeneration" },
-      { name: "CSRF & session security", evidence: "This site — SameSite=Strict plus double-submit tokens" },
-      { name: "Input validation", evidence: "This site — schema validation and normalisation on every untrusted ingest path" },
+      { name: "Content Security Policy", evidence: "This site: strict policy with no script-src exemptions" },
+      { name: "Authentication hardening", evidence: "This site: bcrypt, lockout, timing-safe failure paths, session regeneration" },
+      { name: "CSRF & session security", evidence: "This site: SameSite=Strict plus double-submit tokens" },
+      { name: "Input validation", evidence: "This site: schema validation and normalisation on every untrusted ingest path" },
     ],
   },
   {
     group: "Full-stack engineering",
     items: [
-      { name: "Node.js & Express 5", evidence: "This site — layered API: config, middleware, routes, services" },
-      { name: "PostgreSQL", evidence: "This site — schema design, indexing strategy, forward-only migrations" },
+      { name: "Node.js & Express 5", evidence: "This site: layered API: config, middleware, routes, services" },
+      { name: "PostgreSQL", evidence: "This site: schema design, indexing strategy, forward-only migrations" },
       { name: "SQL", evidence: "Window-free aggregation, CTEs, generate_series time series, GIN-indexed JSONB" },
       { name: "REST API design", evidence: "Versionless resource endpoints with bounded, validated query parameters" },
       { name: "React 19", evidence: "Routed SPA with reusable components and no state library" },
@@ -233,83 +229,57 @@ export const evidencedSkills = [
 ];
 
 /**
- * The wider toolkit — from work, study and self-directed projects beyond this
- * repository.
+ * The wider toolkit: skills from work, study and self-directed projects beyond
+ * this repository.
  */
 export const skillGroups = [
-  {
-    group: "Security operations",
-    items: [
-      "SOC operations",
-      "SIEM monitoring",
-      "Incident triage",
-      "Endpoint analysis",
-      "Threat detection",
-      "Detection engineering",
-      "Alert tuning & validation",
-    ],
-  },
-  {
-    group: "Security tooling",
-    items: ["Splunk Enterprise", "Sysmon", "Wireshark", "Nmap", "Burp Suite", "Scapy"],
-  },
-  {
-    group: "Frameworks & methodology",
-    items: [
-      "MITRE ATT&CK",
-      "Cyber Kill Chain",
-      "Essential Eight",
-      "Zero Trust",
-      "Principle of Least Privilege",
-      "Vulnerability assessment",
-      "Business Continuity Planning",
-    ],
-  },
-  {
-    group: "Networking",
-    items: [
-      "TCP/IP",
-      "Network traffic analysis",
-      "Port scanning & detection",
-      "Firewalls",
-      "Windows Event Logs",
-    ],
-  },
-  {
-    group: "Cloud & infrastructure",
-    items: [
-      "AWS (certified)",
-      "Microsoft Entra ID",
-      "Azure Backup",
-      "Vercel",
-      "CI/CD workflows",
-      "Linux & Windows environments",
-      "Virtualisation",
-    ],
-  },
-  {
-    group: "Languages",
-    items: ["Python", "SQL", "JavaScript (Node.js)", "Bash scripting", "GDScript"],
-  },
-  {
-    group: "Development",
-    items: [
-      "FastAPI",
-      "Node.js",
-      "RESTful API design & development",
-      "PostgreSQL",
-      "Relational data modelling",
-      "Git version control",
-    ],
-  },
   {
     group: "Professional",
     items: [
       "Analytical thinking",
       "Problem solving",
+      "Stakeholder management",
       "Stakeholder communication",
-      "Technical documentation",
+      "Teamwork",
       "Cross-functional collaboration",
+      "Technical documentation",
+      "Adaptability",
+    ],
+  },
+  {
+    group: "Frameworks & Technology",
+    items: [
+      "CIA Triad",
+      "MITRE ATT&CK",
+      "Cyber Kill Chain",
+      "Essential Eight",
+      "Zero Trust",
+      "Principle of Least Privilege",
+      "Splunk Enterprise",
+      "Sysmon",
+      "Wireshark",
+      "Nmap",
+      "Burp Suite",
+      "Microsoft Entra ID",
+      "Azure Backup",
+      "AWS",
+    ],
+  },
+  {
+    group: "Development",
+    items: [
+      "Python",
+      "SQL",
+      "JavaScript (Node.js)",
+      "Bash scripting",
+      "GDScript",
+      "FastAPI",
+      "RESTful API design",
+      "PostgreSQL",
+      "Relational data modelling",
+      "Git version control",
+      "CI/CD workflows",
+      "Vercel",
     ],
   },
 ];
@@ -331,12 +301,12 @@ export const certifications = [
   {
     name: "Cisco Certified Network Associate (CCNA)",
     issuer: "Cisco",
-    status: "In progress — commenced March 2026",
+    status: "In progress, commenced March 2026",
   },
   {
     name: "Data Analytics",
     issuer: "University of Technology Sydney",
-    status: "Completed — SQL, data cleaning and data modelling",
+    status: "Completed: SQL, data cleaning and data modelling",
   },
 ];
 

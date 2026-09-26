@@ -29,7 +29,7 @@ function Section({ id, number, eyebrow, title, children }) {
     <section className="case__section" id={id}>
       <Reveal>
         <p className="eyebrow">
-          {String(number).padStart(2, "0")} — {eyebrow}
+          {String(number).padStart(2, "0")} · {eyebrow}
         </p>
         <h2 className="title-l case__title">{title}</h2>
       </Reveal>
@@ -62,9 +62,9 @@ export default function ProjectDetail() {
   /*
    * Sections are assembled and then filtered, rather than each being rendered
    * with its own guard, so the numbering stays contiguous. A project that has
-   * no security section should not leave a gap where "07" used to be — and,
-   * more importantly, a missing section must never be a reason to invent
-   * content to fill the heading.
+   * no security section should not leave a gap where "07" used to be. More
+   * importantly, a missing section must never be a reason to invent content
+   * just to fill the heading.
    */
   const blocks = [
     {
@@ -230,8 +230,9 @@ export default function ProjectDetail() {
 
             {project.draft && (
               <p className="case__draft" role="note">
-                <strong>Case study in progress.</strong> The structure below is ready; the content
-                marked TODO is still to be written. Nothing has been filled in with invented detail.
+                <strong>In progress.</strong> This one is still being built, so the write-up is
+                short on purpose. It gets filled in when there is working code to describe, not
+                before.
               </p>
             )}
 
@@ -253,9 +254,6 @@ export default function ProjectDetail() {
                 >
                   Live demo <span className="btn__arrow" aria-hidden="true">→</span>
                 </ExternalLink>
-              )}
-              {project.draft && !isReal(project.links?.github) && !isReal(project.links?.demo) && (
-                <Todo hint="Add GitHub / demo URLs in content/projects.js" />
               )}
             </div>
           </Reveal>

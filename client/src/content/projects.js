@@ -4,7 +4,7 @@
  * ---------------------------------------------------------------------------
  * SOURCING RULE
  * ---------------------------------------------------------------------------
- * Every factual claim below is drawn from the repository it describes — its
+ * Every factual claim below is drawn from the repository it describes: its
  * README, its source, or its commit history. Thresholds, module names, port
  * lists and stack versions were read out of the code rather than estimated.
  *
@@ -18,8 +18,6 @@
  * ---------------------------------------------------------------------------
  */
 
-import { TODO } from "./site.js";
-
 export const projects = [
   {
     slug: "phishsafe",
@@ -32,24 +30,24 @@ export const projects = [
     accent: "threat",
 
     summary:
-      "Rather than teaching phishing recognition with a slide deck, PhishSafe drops the player into a fake desktop OS — mail, calendar, news, calculator, settings — and lets them meet suspicious messages in the place they would actually meet them. Built in Godot 4.6.",
+      "Rather than teaching phishing recognition with a slide deck, PhishSafe drops the player into a fake desktop OS (mail, calendar, news, calculator, settings) and lets them meet suspicious messages in the place they would actually meet them. Built in Godot 4.6.",
 
     tags: ["Godot 4.6", "GDScript", "Security awareness", "Game development", "JSON"],
 
     sections: {
-      overview: `PhishSafe is a security-awareness trainer shaped like an operating system. The player logs in to a simulated desktop and works through a normal-looking environment — an inbox, a calendar, a news feed, a calculator, a settings panel — where some of the messages waiting for them are phishing attempts and some are not.
+      overview: `PhishSafe is a security-awareness trainer shaped like an operating system. The player logs in to a simulated desktop and works through a normal-looking environment of inbox, calendar, news feed, calculator and settings panel, where some of the messages waiting for them are phishing attempts and some are not.
 
 The design bet is that phishing recognition is contextual. An email that is obviously fraudulent in a training slide is much less obvious sitting in an inbox between two real ones, under time pressure, with a plausible sender and a familiar subject line. Putting the lesson inside a simulated desktop keeps that context intact.
 
 The project is built in Godot 4.6 with GDScript, and is structured the way a small OS would be: a login screen, a desktop shell with launchable app items, resizeable windows, per-user accounts and profiles, and a global manager coordinating them.`,
 
-      problem: `Phishing awareness training usually fails in the same way. It shows the learner a clearly-labelled bad email, the learner correctly identifies it, and nothing transfers — because the hard part was never identifying an email already flagged as suspicious. The hard part is noticing the one that is not flagged, in an inbox, while doing something else.
+      problem: `Phishing awareness training usually fails in the same way. It shows the learner a clearly-labelled bad email, the learner correctly identifies it, and nothing transfers, because the hard part was never identifying an email already flagged as suspicious. The hard part is noticing the one that is not flagged, in an inbox, while doing something else.
 
 The gap is context. A training example stripped of its surroundings removes exactly the signal the learner needs to practise reading.`,
 
       solution: `Rebuild the surroundings. PhishSafe implements enough of a desktop environment that the inbox feels like an inbox: the mail app sits alongside a calendar, a news feed and a calculator, each one a working app rather than a backdrop, and the player reaches the emails by opening the mail client like they would at work.
 
-Each email in the dataset carries the phishing verdict as structured data rather than prose — a sender address, a body, a tag, and an \`is_phishing\` flag — alongside a short explanation naming the specific indicator that gives it away: the lookalike domain, the artificial deadline, the financial request, the unexpected shared document. The verdict is data the game checks against, and the explanation is what the player is left with.
+Each email in the dataset carries the phishing verdict as structured data rather than prose (a sender address, a body, a tag, and an \`is_phishing\` flag) alongside a short explanation naming the specific indicator that gives it away: the lookalike domain, the artificial deadline, the financial request, the unexpected shared document. The verdict is data the game checks against, and the explanation is what the player is left with.
 
 A companion repository, EmailFiles, holds a richer JSON schema for the same idea: a difficulty rating, tags, links, attachments with an \`IsMalicious\` flag, an explicit list of indicators, a written explanation, the correct action to take, and a reward value for taking it.`,
 
@@ -72,7 +70,7 @@ A companion repository, EmailFiles, holds a richer JSON schema for the same idea
           "Simulated desktop with a login screen, launchable app items and resizeable windows",
           "Mail client presenting phishing and legitimate messages side by side, each with a sender, subject, preview, body and tag",
           "Per-email phishing verdict held as structured data, with a written explanation of the indicator that identifies it",
-          "Supporting apps — calendar, news feed, calculator with history, settings — so the inbox sits in a plausible environment",
+          "Supporting apps: calendar, news feed, calculator with history and settings, so the inbox sits in a plausible environment",
           "Per-user accounts and profiles, with generated identifiers and separate work and personal email addresses",
           "User-configurable display, audio and notification settings persisted against the account",
           "A companion JSON email schema (EmailFiles) carrying difficulty, tags, links, attachments, indicators, correct action and reward",
@@ -91,7 +89,7 @@ A companion repository, EmailFiles, holds a richer JSON schema for the same idea
         description:
           "A phishing trainer is a piece of software that deliberately shows people convincing phishing content, so the safety model matters as much as the lesson.",
         items: [
-          "Every message is simulated. Emails carry no live links and no real attachments — an attachment is a filename, an extension and a flag, not a file.",
+          "Every message is simulated. Emails carry no live links and no real attachments. An attachment is a filename, an extension and a flag, not a file.",
           "Simulated senders use deliberately non-routable training domains, including an explicit no-phish.com for the legitimate internal mail, so nothing in the content resolves to a real organisation.",
           "Messages that are phishing examples say so in their own body text, so a screenshot taken out of context cannot be mistaken for a real lure.",
           "The verdict and the explanation live beside each message as data, so the training content and the answer key cannot drift apart.",
@@ -126,17 +124,17 @@ A companion repository, EmailFiles, holds a richer JSON schema for the same idea
     tags: ["Python", "Scapy", "SQLite", "PCAP", "Network security", "CLI"],
 
     sections: {
-      overview: `A network intrusion detection system written in Python, built — in the README's own words — to better understand how network-based threats can be detected in real time.
+      overview: `A network intrusion detection system written in Python, built, in the README's own words, to better understand how network-based threats can be detected in real time.
 
 It captures packets from a chosen interface, or reads a saved PCAP file, turns each packet into a normalised network event, and runs that event past three detection rules. Anything that fires becomes an alert with a severity, a source and destination address, and a human-readable explanation of what triggered it. Alerts are written to SQLite and can be exported to CSV.`,
 
       problem: `Detection tools are easy to use and hard to understand. Running Snort or Suricata teaches you their configuration format; it does not teach you what a port scan actually looks like in a packet stream, or why a detection rule needs a time window and a cooldown at all.
 
-Writing the detector is what surfaces those questions — how many unique ports in how many seconds constitutes a scan, what stops one noisy host generating a thousand identical alerts, what to do with a packet that has no destination port.`,
+Writing the detector is what surfaces those questions: how many unique ports in how many seconds constitutes a scan, what stops one noisy host generating a thousand identical alerts, what to do with a packet that has no destination port.`,
 
       solution: `A small, readable pipeline with the detection logic isolated in one place.
 
-Packets arrive through a sniffing engine that wraps Scapy and imports it lazily, so listing the detection rules or reading stored alerts does not require the capture dependency to be present. Each packet becomes a \`NetworkEvent\` dataclass — timestamp, source and destination address, protocol, ports, TCP flags, length — and every rule consumes that one normalised shape rather than raw Scapy layers.
+Packets arrive through a sniffing engine that wraps Scapy and imports it lazily, so listing the detection rules or reading stored alerts does not require the capture dependency to be present. Each packet becomes a \`NetworkEvent\` dataclass carrying timestamp, source and destination address, protocol, ports, TCP flags and length, and every rule consumes that one normalised shape rather than raw Scapy layers.
 
 The detector holds per-source sliding windows and evaluates three rules against each event. Any alert it produces passes through a shared cooldown keyed on the source address and the rule that fired, which is what stops a single scanning host flooding the alert table with the same finding.`,
 
@@ -157,9 +155,9 @@ The detector holds per-source sliding windows and evaluates three rules against 
       capabilities: {
         description: "The three detection rules, with the thresholds actually set in the source.",
         items: [
-          "Possible port scan — flagged when one source address contacts 15 or more unique destination ports within a 15-second sliding window. Severity: high.",
-          "Traffic spike — flagged when one source sends 120 or more packets within a 10-second sliding window. Severity: high.",
-          "Suspicious port access — flagged on traffic to a known high-risk port: FTP (21), Telnet (23), RPC (135), NetBIOS (139), SMB (445), RDP (3389), 4444 (Meterpreter-style) and 5555 (ADB). Severity: medium.",
+          "Possible port scan, flagged when one source address contacts 15 or more unique destination ports within a 15-second sliding window. Severity: high.",
+          "Traffic spike, flagged when one source sends 120 or more packets within a 10-second sliding window. Severity: high.",
+          "Suspicious port access, flagged on traffic to a known high-risk port: FTP (21), Telnet (23), RPC (135), NetBIOS (139), SMB (445), RDP (3389), 4444 (Meterpreter-style) and 5555 (ADB). Severity: medium.",
           "A 20-second cooldown per source-and-rule pair, so one noisy host cannot flood the alert table with duplicates of the same finding",
           "Live capture on a named interface, or offline analysis of a saved PCAP",
           "Alerts persisted to SQLite with timestamp, type, severity, both addresses and detail",
@@ -180,10 +178,10 @@ The detector holds per-source sliding windows and evaluates three rules against 
         description:
           "A packet sniffer is a privileged tool, and the project is written to keep that privilege narrow and the data local.",
         items: [
-          "Live capture requires root, and only the capture path does — reading stored alerts or exporting CSV runs unprivileged.",
+          "Live capture requires root, and only the capture path does. Reading stored alerts or exporting CSV runs unprivileged.",
           "Scapy is imported lazily inside the capture functions, so the privileged dependency is never loaded by commands that do not need it.",
           "Every SQL statement is parameterised; alert fields never reach the database through string interpolation.",
-          "Captured traffic is not retained. Packets become normalised events, events become alerts, and only alerts are persisted — the payload is never written to disk.",
+          "Captured traffic is not retained. Packets become normalised events, events become alerts, and only alerts are persisted. The payload is never written to disk.",
         ],
       },
 
@@ -223,13 +221,13 @@ The lab also produced an unplanned piece of SIEM administration experience: log 
 
       problem: `Detection content is easy to copy and hard to trust. A rule taken from a blog post will run, and it will produce alerts, but running it teaches you nothing about whether it fires on the activity you care about, how often it fires on activity you do not, or what it costs to tune.
 
-The only way to know a detection works is to generate the behaviour it targets and watch it trigger — which requires an environment where generating that behaviour is safe.`,
+The only way to know a detection works is to generate the behaviour it targets and watch it trigger, which requires an environment where generating that behaviour is safe.`,
 
       solution: `Build the environment, then close the loop on every rule.
 
-Windows Event Logs and Sysmon feed Splunk Enterprise as the telemetry sources — between them they cover authentication, process creation, registry activity and account management, which is most of what the chosen detections need. Each detection was written as a search, promoted to an alert, then deliberately triggered by performing the activity in the lab and confirmed against the resulting events.
+Windows Event Logs and Sysmon feed Splunk Enterprise as the telemetry sources, and between them they cover authentication, process creation, registry activity and account management, which is most of what the chosen detections need. Each detection was written as a search, promoted to an alert, then deliberately triggered by performing the activity in the lab and confirmed against the resulting events.
 
-Validating each rule against activity generated on purpose is what turns a search into a detection. It is also what surfaces tuning work — the difference between a rule that fires and a rule that fires on the right thing.`,
+Validating each rule against activity generated on purpose is what turns a search into a detection. It is also what surfaces tuning work: the difference between a rule that fires and a rule that fires on the right thing.`,
 
       architecture: {
         description:
@@ -247,13 +245,13 @@ Validating each rule against activity generated on purpose is what turns a searc
       capabilities: {
         description: "The seven detections implemented and validated in the lab.",
         items: [
-          "Failed login attempts — the baseline credential-attack signal",
-          "Successful login following multiple failed attempts — the pattern that separates a successful brute force from ordinary mistyping",
+          "Failed login attempts, the baseline credential-attack signal",
+          "Successful login following multiple failed attempts, the pattern that separates a successful brute force from ordinary mistyping",
           "Suspicious PowerShell execution",
           "New user account creation",
-          "User added to the Administrators group — privilege escalation via group membership",
+          "User added to the Administrators group, which is privilege escalation via group membership",
           "Registry modifications",
-          "Suspicious rundll32 execution — a common living-off-the-land binary",
+          "Suspicious rundll32 execution, a common living-off-the-land binary",
         ],
       },
 
@@ -268,7 +266,7 @@ Validating each rule against activity generated on purpose is what turns a searc
 
       security: {
         description:
-          "The lab generates activity that detections are meant to catch — failed logins, privilege changes, suspicious execution — so containment matters.",
+          "The lab generates activity that detections are meant to catch, including failed logins, privilege changes and suspicious execution, so containment matters.",
         items: [
           "All activity is generated inside a virtualised environment built for the exercise, isolated from any production system.",
           "Only the detection logic and findings are published. No telemetry, host detail or configuration from the lab is shared.",
@@ -277,16 +275,16 @@ Validating each rule against activity generated on purpose is what turns a searc
       },
 
       challenges: [
-        "Splunk stopped ingesting logs partway through the lab. Diagnosing it came down to the forwarder input configuration, and restoring ingestion meant rebuilding inputs.conf from scratch — which turned an interruption into the most useful SIEM administration experience in the project.",
+        "Splunk stopped ingesting logs partway through the lab. Diagnosing it came down to the forwarder input configuration, and restoring ingestion meant rebuilding inputs.conf from scratch, which turned an interruption into the most useful SIEM administration experience in the project.",
       ],
 
       results:
-        "Seven detections implemented, alerted on and validated against activity generated in the lab, across credential attacks, suspicious execution, privilege escalation and registry modification — plus a restored ingestion pipeline after diagnosing and rebuilding the forwarder input configuration.",
+        "Seven detections implemented, alerted on and validated against activity generated in the lab, across credential attacks, suspicious execution, privilege escalation and registry modification, plus a restored ingestion pipeline after diagnosing and rebuilding the forwarder input configuration.",
 
       lessons: [
         "A detection is not finished when the search returns results. It is finished when you have fired the behaviour on purpose and watched the alert catch it.",
         "Most of a SIEM analyst's time is not spent writing detections. Ingestion, parsing and tuning are the job, and a pipeline that quietly stops is worse than one that loudly breaks.",
-        "Detecting a successful login after repeated failures is far more valuable than detecting either signal alone — the sequence is the finding.",
+        "Detecting a successful login after repeated failures is far more valuable than detecting either signal alone. The sequence is the finding.",
       ],
     },
 
@@ -318,17 +316,17 @@ Validating each rule against activity generated on purpose is what turns a searc
 
 The work covers the whole loop rather than just the detection: simulate the activity, find it in the telemetry, establish what the attacker learned, map the behaviour to a known technique, and recommend controls that would catch or prevent it.`,
 
-      problem: `Reconnaissance is the stage of an intrusion most likely to be dismissed as noise. A port scan breaks nothing and triggers no obvious failure, so it is easy to treat as background internet traffic — but it is how an attacker builds the service inventory that every later stage depends on.
+      problem: `Reconnaissance is the stage of an intrusion most likely to be dismissed as noise. A port scan breaks nothing and triggers no obvious failure, so it is easy to treat as background internet traffic. But it is how an attacker builds the service inventory that every later stage depends on.
 
 Detecting it means knowing what it looks like at the endpoint, in telemetry that is actually collected.`,
 
       solution: `Build the lab, run the attack, then work the detection backwards from the logs.
 
-Two VirtualBox machines on a host-only network — a Kali attacker and a Windows 10 target running Sysmon — gave a closed environment where every packet on the wire was one of mine. The scan was a TCP connect scan against four ports chosen for being worth an attacker's attention:
+Two VirtualBox machines on a host-only network, a Kali attacker and a Windows 10 target running Sysmon, gave a closed environment where every packet on the wire was one of mine. The scan was a TCP connect scan against four ports chosen for being worth an attacker's attention:
 
     nmap -n -sT -Pn -p 80,135,445,3389 192.168.56.103
 
-Detection then came from Sysmon Event ID 3, which records network connections at the endpoint. The signature of the scan is not any single event — one connection attempt is unremarkable — but the pattern across them: the same source address reaching several different ports in quick succession.`,
+Detection then came from Sysmon Event ID 3, which records network connections at the endpoint. The signature of the scan is not any single event, since one connection attempt is unremarkable. It is the pattern across them: the same source address reaching several different ports in quick succession.`,
 
       architecture: {
         description:
@@ -347,7 +345,7 @@ Detection then came from Sysmon Event ID 3, which records network connections at
         description: "What the exercise established.",
         items: [
           "Attacker source address 192.168.56.102 scanning target 192.168.56.103 across ports 80, 135, 445 and 3389",
-          "Multiple connection attempts to different ports in quick succession — the pattern that distinguishes a scan from ordinary traffic",
+          "Multiple connection attempts to different ports in quick succession, the pattern that distinguishes a scan from ordinary traffic",
           "Behaviour mapped to MITRE ATT&CK T1046, Network Service Discovery",
           "Impact assessed: the attacker is building an inventory of exposed services to use at a later stage of the attack lifecycle",
           "Remediation recommended: alert on repeated connection attempts, close unnecessary ports, add firewall rules against unauthorised scanning, and route the telemetry into SIEM or IDS alerting",
@@ -360,7 +358,7 @@ Detection then came from Sysmon Event ID 3, which records network connections at
         { area: "Telemetry", value: "Sysmon, Event ID 3 (network connection)" },
         { area: "Tooling", value: "Nmap TCP connect scan (-sT -Pn)" },
         { area: "Network", value: "Host-only, isolated from the internet" },
-        { area: "Framework", value: "MITRE ATT&CK — T1046 Network Service Discovery" },
+        { area: "Framework", value: "MITRE ATT&CK T1046, Network Service Discovery" },
       ],
 
       security: {
@@ -368,7 +366,7 @@ Detection then came from Sysmon Event ID 3, which records network connections at
           "The exercise involves running an attack tool, so the containment is part of the method rather than an afterthought.",
         items: [
           "Both machines sit on a VirtualBox host-only network, so the scan cannot reach anything outside the lab.",
-          "The target is a virtual machine built for the exercise — no production system and no third-party host is scanned at any point.",
+          "The target is a virtual machine built for the exercise. No production system and no third-party host is scanned at any point.",
           "Only the write-up is published. The lab itself stays local, and nothing in the repository is a runnable attack against a live target.",
         ],
       },
@@ -391,87 +389,9 @@ Detection then came from Sysmon Event ID 3, which records network connections at
   },
 
   {
-    slug: "threatscope",
-    name: "ThreatScope",
-    tagline: TODO("One line: what ThreatScope does, e.g. “Threat intelligence aggregation and enrichment pipeline”"),
-    category: "Threat Intelligence",
-    /** `draft: true` renders a visible “case study in progress” banner. */
-    draft: true,
-    year: TODO("e.g. 2025"),
-    status: TODO("e.g. “In active development” / “Shipped” / “Archived”"),
-    accent: "threat",
-
-    /** Shown on the index card. Keep to two sentences. */
-    summary: TODO(
-      "Two sentences a recruiter can read in five seconds. What problem does ThreatScope solve, and for whom?"
-    ),
-
-    tags: [TODO("Add the real stack tags, e.g. Python, PostgreSQL, MISP, STIX/TAXII")],
-
-    sections: {
-      overview: TODO(
-        "What is ThreatScope? Who would use it? What does it do that an off-the-shelf tool does not? Two or three short paragraphs."
-      ),
-      problem: TODO(
-        "What specific problem prompted you to build it? Be concrete — the sharper the problem statement, the stronger the case study."
-      ),
-      solution: TODO(
-        "How does it solve that problem? Describe the approach, not a feature list."
-      ),
-      architecture: {
-        description: TODO("How the system is put together, and why it is shaped that way."),
-        /** Rendered as a labelled flow diagram. Replace with your real stages. */
-        flow: [TODO("e.g. Feed ingestion"), TODO("e.g. Normalisation"), TODO("e.g. Enrichment"), TODO("e.g. Scoring"), TODO("e.g. Analyst interface")],
-      },
-      capabilities: {
-        description: TODO("What threat-intelligence capabilities does it actually have today?"),
-        items: [
-          TODO("Capability 1 — only list what is genuinely implemented"),
-          TODO("Capability 2"),
-          TODO("Capability 3"),
-        ],
-      },
-      technology: [
-        { area: "Language & runtime", value: TODO("e.g. Python 3.12") },
-        { area: "Data store", value: TODO("e.g. PostgreSQL 16") },
-        { area: "Intelligence sources", value: TODO("e.g. OTX, abuse.ch, internal feeds") },
-        { area: "Interface", value: TODO("e.g. FastAPI + React") },
-        { area: "Deployment", value: TODO("e.g. Docker Compose on a private VPS") },
-      ],
-      security: {
-        description: TODO(
-          "How did you secure it? API key handling, input validation on untrusted feed data, isolation of analysis, least privilege on the database."
-        ),
-        items: [TODO("Security control 1"), TODO("Security control 2"), TODO("Security control 3")],
-      },
-      challenges: [
-        TODO("A real problem you hit and how you solved it. Specific beats impressive."),
-        TODO("Another one."),
-      ],
-      results: TODO(
-        "What is the outcome? If you have no measured numbers, describe capability rather than inventing a metric — an honest 'it processes N feeds and surfaces X' beats a fabricated percentage."
-      ),
-      lessons: [
-        TODO("What you would do differently next time."),
-        TODO("Something the project taught you about security engineering."),
-      ],
-    },
-
-    screenshots: [
-      // Add images to client/public/projects/ and reference them here:
-      //   { src: "/projects/threatscope-dashboard.png", alt: "…", caption: "…" }
-    ],
-
-    links: {
-      github: TODO("https://github.com/your-username/threatscope"),
-      demo: TODO("Live demo URL, or delete this line if there is not one"),
-    },
-  },
-
-  {
     slug: "portfolio-analytics",
     name: "Portfolio Analytics Platform",
-    tagline: "A first-party, privacy-conscious web analytics platform — the one running on this site.",
+    tagline: "A first-party, privacy-conscious web analytics platform, and the one running on this site.",
     category: "Full-stack / Security Engineering",
     draft: false,
     year: "2026",
@@ -479,14 +399,14 @@ Detection then came from Sysmon Event ID 3, which records network connections at
     accent: "analytics",
 
     summary:
-      "Rather than adding Google Analytics, this site runs an analytics platform built from scratch: anonymous visitor identity, session reconstruction, page-view and event ingest, journey analysis, and a private admin console — on Node.js, Express and PostgreSQL.",
+      "Rather than adding Google Analytics, this site runs an analytics platform built from scratch: anonymous visitor identity, session reconstruction, page-view and event ingest, journey analysis and a private admin console, all on Node.js, Express and PostgreSQL.",
 
     tags: ["Node.js", "Express 5", "PostgreSQL 18", "React", "bcrypt", "CSP", "SQL"],
 
     sections: {
       overview: `Every page you have loaded on this site has been recorded by a system built for it specifically. There is no third-party analytics script anywhere in the page, no external network request, and no data leaves the origin.
 
-The platform tracks what a portfolio owner actually wants to know — which projects get read, where visitors arrive from, how far they get before leaving — while collecting materially less about the visitor than a standard commercial tag would. It is the same problem every analytics vendor solves, solved with the privacy trade-offs chosen deliberately rather than inherited.`,
+The platform tracks what a portfolio owner actually wants to know (which projects get read, where visitors arrive from, how far they get before leaving) while collecting materially less about the visitor than a standard commercial tag would. It is the same problem every analytics vendor solves, solved with the privacy trade-offs chosen deliberately rather than inherited.`,
 
       problem: `Third-party analytics is the default answer, and it has two problems worth taking seriously.
 
@@ -494,7 +414,7 @@ The first is privacy. A commercial tag typically collects a full User-Agent stri
 
 The second is that using one demonstrates nothing. A security portfolio that outsources its own instrumentation to a script tag is not evidence of engineering ability.`,
 
-      solution: `A four-level data model — visitor, session, page view, event — with an ingest API, an aggregation layer and an authenticated console on top.
+      solution: `A four-level data model of visitor, session, page view and event, with an ingest API, an aggregation layer and an authenticated console on top.
 
 Identity is a random v4 UUID in an HttpOnly first-party cookie. It is generated by the platform CSPRNG and derived from nothing about the visitor: no IP, no User-Agent hash, no canvas, no clock skew. Two people on one machine get unrelated identifiers, and the same person in a private window is a new visitor. That is a deliberate accuracy cost paid to avoid fingerprinting.
 
@@ -518,7 +438,7 @@ Sessions are reconstructed server-side from activity with a 30-minute inactivity
         description: "What the platform measures, and how.",
         items: [
           "Anonymous visitors, sessions, page views and typed interaction events",
-          "Traffic-source attribution from referrers — Google, LinkedIn, GitHub, search, referral, direct",
+          "Traffic-source attribution from referrers: Google, LinkedIn, GitHub, search, referral, direct",
           "Journey reconstruction: entry pages, page-to-page transitions, common paths, exit points",
           "Coarse device, browser and OS families, parsed at ingest with the raw User-Agent discarded",
           "Bot filtering applied to every reported figure",
@@ -530,7 +450,7 @@ Sessions are reconstructed server-side from activity with a 30-minute inactivity
         { area: "Runtime", value: "Node.js 24, Express 5" },
         { area: "Database", value: "PostgreSQL 18, with a forward-only SQL migration runner" },
         { area: "Frontend", value: "React 19, Vite, React Router, Framer Motion" },
-        { area: "Charts", value: "Hand-built SVG primitives — no chart library" },
+        { area: "Charts", value: "Hand-built SVG primitives, no chart library" },
         { area: "Auth", value: "bcrypt, PostgreSQL-backed server-side sessions" },
         { area: "Hardening", value: "Helmet, strict CSP, rate limiting, parameterised SQL throughout" },
       ],
@@ -550,7 +470,7 @@ Sessions are reconstructed server-side from activity with a 30-minute inactivity
       },
 
       challenges: [
-        "The original visitor middleware wrote to PostgreSQL on every HTTP request — including every asset and favicon probe — so a single page load produced dozens of writes and rewrote last_seen from asset traffic. Moving all database work to the ingest endpoints reduced it to one write path per real navigation.",
+        "The original visitor middleware wrote to PostgreSQL on every HTTP request, including every asset and favicon probe, so a single page load produced dozens of writes and rewrote last_seen from asset traffic. Moving all database work to the ingest endpoints reduced it to one write path per real navigation.",
         "Raw User-Agent strings were being stored. A full UA is a meaningful fingerprinting component and the dashboard only needs three coarse answers from it, so classification moved to ingest time and the column was dropped rather than left dormant.",
         "Letting a language model describe analytics invites invented statistics. The fix was to verify output rather than trust it: every number in a generated insight is checked against the source aggregates, and any sentence containing a figure that is not in the data is discarded before it reaches the screen.",
       ],
@@ -560,7 +480,7 @@ Sessions are reconstructed server-side from activity with a 30-minute inactivity
 
       lessons: [
         "Privacy decisions are mostly schema decisions. Choosing not to store a column is a far stronger control than choosing not to look at it.",
-        "Denormalised counters on the session row removed correlated subqueries from nearly every dashboard aggregate — worth the write cost many times over.",
+        "Denormalised counters on the session row removed correlated subqueries from nearly every dashboard aggregate, and that is worth the write cost many times over.",
         "An AI feature is only as trustworthy as its verification step. Grounding output in checked data matters more than the prompt.",
       ],
     },
@@ -572,6 +492,39 @@ Sessions are reconstructed server-side from activity with a 30-minute inactivity
       demo: null,
     },
   },
+  {
+    slug: "threatscope",
+    name: "ThreatScope",
+    tagline: "A threat intelligence aggregation and enrichment pipeline, currently being built.",
+    category: "Threat Intelligence",
+    /** `draft: true` renders a visible “in progress” banner. */
+    draft: true,
+    year: "2026",
+    status: "In progress",
+    accent: "threat",
+
+    /** Shown on the index card. Keep to two sentences. */
+    summary:
+      "ThreatScope pulls indicators from open threat intelligence feeds, normalises them into one shape and enriches them so an analyst can judge an indicator without opening five tabs. It is in active development, and this page will be written up properly once there is something worth reading rather than something worth promising.",
+
+    tags: ["Python", "PostgreSQL", "Threat intelligence", "In progress"],
+
+    sections: {
+      overview: `ThreatScope is the project I am building at the moment, so this entry is deliberately short.
+
+The idea is straightforward: open threat intelligence is plentiful and badly shaped. Feeds disagree on format, on confidence, and on what an indicator even is, and the work of reconciling them falls on whoever is doing the triage. ThreatScope is an attempt to do that reconciliation once, in a pipeline, rather than every time an indicator comes up.
+
+The rest of this case study stays empty until the system does what the summary says it does. Every other project on this site is written from code that exists, and this one will be too.`,
+    },
+
+    screenshots: [],
+
+    links: {
+      github: null,
+      demo: null,
+    },
+  },
+
 ];
 
 /**
@@ -602,12 +555,6 @@ export const otherRepositories = [
       "A scheduled WhatsApp reminder script using pywhatkit and pyautogui, with an optional email notification path.",
     language: "Python",
     url: "https://github.com/SahilZ1/Project",
-  },
-  {
-    name: "RTOS-Assignment",
-    description: "Real-time operating systems coursework in C, working from a supplied assignment template.",
-    language: "C",
-    url: "https://github.com/SahilZ1/RTOS-Assignment",
   },
 ];
 

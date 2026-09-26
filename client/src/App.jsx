@@ -24,8 +24,6 @@ const About = lazy(() => import("./pages/About.jsx"));
 const Experience = lazy(() => import("./pages/Experience.jsx"));
 const Projects = lazy(() => import("./pages/Projects.jsx"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail.jsx"));
-const Lab = lazy(() => import("./pages/Lab.jsx"));
-const LabDetail = lazy(() => import("./pages/LabDetail.jsx"));
 const Skills = lazy(() => import("./pages/Skills.jsx"));
 const Certifications = lazy(() => import("./pages/Certifications.jsx"));
 const Education = lazy(() => import("./pages/Education.jsx"));
@@ -68,8 +66,6 @@ export default function App() {
           <Route path="/experience" element={<Experience />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="/lab" element={<Lab />} />
-          <Route path="/lab/:slug" element={<LabDetail />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/certifications" element={<Certifications />} />
           <Route path="/education" element={<Education />} />

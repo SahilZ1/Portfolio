@@ -11,9 +11,9 @@ export default function About() {
       <Seo
         title="About"
         path="/about"
-        description={`About ${site.name} — background, focus and engineering principles in cybersecurity and security engineering.`}
+        description={`About ${site.name}: background, focus and engineering principles in cybersecurity and security engineering.`}
       />
-      <PageHeader eyebrow="About" title={`Hello — I'm ${site.firstName}.`} lede={site.statement} />
+      <PageHeader eyebrow="About" title={`Hello, I'm ${site.firstName}.`} lede={site.statement} />
 
       <section className="section">
         <div className="shell shell--wide about__layout">
@@ -70,11 +70,12 @@ export default function About() {
 
           <RevealGroup className="grid grid--cards principles__grid" gap={0.08}>
             {about.principles.map((principle, index) => (
-              <RevealItem key={index} className="card principles__card">
+              <RevealItem key={principle.name} className="card principles__card">
                 <span className="principles__number" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <p><Text value={principle} /></p>
+                <h3 className="title-s principles__name">{principle.name}</h3>
+                <p><Text value={principle.body} /></p>
               </RevealItem>
             ))}
           </RevealGroup>

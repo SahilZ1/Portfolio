@@ -19,7 +19,6 @@ import { Text, isReal } from "../components/Todo.jsx";
 import { ExternalLink } from "../components/ExternalLink.jsx";
 import { site } from "../content/site.js";
 import { projects } from "../content/projects.js";
-import { labs } from "../content/labs.js";
 import { evidencedSkills } from "../content/profile.js";
 import { EASE, prefersReducedMotion } from "../lib/motion.js";
 import { analytics } from "../lib/analytics.js";
@@ -123,11 +122,11 @@ function Hero() {
             <span className="btn__arrow" aria-hidden="true">→</span>
           </Link>
           <Link
-            to="/lab"
+            to="/about"
             className="btn btn--secondary"
-            onClick={() => analytics.trackEvent("cta_click", { cta: "lab", from: "hero" })}
+            onClick={() => analytics.trackEvent("cta_click", { cta: "about", from: "hero" })}
           >
-            Enter the Cyber Lab
+            More about me
           </Link>
         </motion.div>
       </div>
@@ -160,7 +159,7 @@ function Proof() {
     },
     {
       title: "Instrumented by hand",
-      body: "First-party analytics: visitors, sessions, page views, events and journey reconstruction — no Google Analytics.",
+      body: "First-party analytics covering visitors, sessions, page views, events and journey reconstruction. No Google Analytics anywhere.",
     },
     {
       title: "Hardened deliberately",
@@ -168,7 +167,7 @@ function Proof() {
     },
     {
       title: "Private by design",
-      body: "No fingerprinting, no raw IP storage, User-Agent discarded after classification, retention actually enforced.",
+      body: "No fingerprinting, no raw IP storage, User-Agent thrown away after classification, and retention that is actually enforced.",
     },
   ];
 
@@ -226,7 +225,7 @@ function FeaturedWork() {
               >
                 <div className="project-card__head">
                   <span className="tag tag--brand">{project.category}</span>
-                  {project.draft && <span className="tag">Case study in progress</span>}
+                  {project.draft && <span className="tag">In progress</span>}
                 </div>
                 <h3 className="title-m project-card__title">{project.name}</h3>
                 <p className="project-card__summary muted">
@@ -243,54 +242,6 @@ function FeaturedWork() {
             </RevealItem>
           ))}
         </RevealGroup>
-      </div>
-    </section>
-  );
-}
-
-/** Cyber Lab teaser. */
-function LabTeaser() {
-  return (
-    <section className="section section--lab">
-      <div className="shell shell--wide">
-        <Reveal className="section__head">
-          <div>
-            <p className="eyebrow">Cyber Lab</p>
-            <h2 className="title-xl">Findings from systems I own</h2>
-            <p className="lede">
-              Write-ups of security work carried out against systems I built or control. The
-              deliberately vulnerable targets stay isolated and local — what is published here is
-              the finding, the fix and the reasoning.
-            </p>
-          </div>
-        </Reveal>
-
-        <RevealGroup className="grid grid--cards lab-teaser__grid" gap={0.08}>
-          {labs.map((lab) => (
-            <RevealItem key={lab.slug}>
-              <Link
-                to={`/lab/${lab.slug}`}
-                className="card card--interactive lab-card"
-                onClick={() => analytics.trackEvent("lab_view", { lab: lab.slug, from: "home" })}
-              >
-                <span className="lab-card__category">{lab.categoryLabel}</span>
-                <h3 className="title-s lab-card__title">{lab.title}</h3>
-                <p className="muted lab-card__summary">{lab.summary}</p>
-                <span className="lab-card__findings">
-                  {lab.findings.length} findings
-                  <span aria-hidden="true">→</span>
-                </span>
-              </Link>
-            </RevealItem>
-          ))}
-        </RevealGroup>
-
-        <Reveal delay={0.1}>
-          <Link to="/lab" className="btn btn--secondary">
-            All lab write-ups
-            <span className="btn__arrow" aria-hidden="true">→</span>
-          </Link>
-        </Reveal>
       </div>
     </section>
   );
@@ -346,7 +297,7 @@ function Contact() {
           <p className="lede">
             <Text
               value={site.availability}
-              fallback="I am interested in security engineering work where the building and the securing are the same job."
+              fallback="I am interested in work where the building and the securing are the same job."
             />
           </p>
           <div className="cta__actions">
@@ -382,7 +333,6 @@ export default function Home() {
       <Hero />
       <Proof />
       <FeaturedWork />
-      <LabTeaser />
       <Capabilities />
       <Contact />
     </>

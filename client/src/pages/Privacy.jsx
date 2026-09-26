@@ -46,8 +46,8 @@ const COLLECTED = [
       ["Referrer", "The origin and path that linked here, with the query string removed. Often absent entirely."],
       ["Traffic source", "A bucket derived from the referrer: Google, LinkedIn, GitHub, search, referral, or direct."],
       ["Device category", "One of: desktop, mobile, tablet, unknown."],
-      ["Browser family", "A name only — “Chrome”, “Safari”. No version."],
-      ["Operating system family", "A name only — “Windows”, “iOS”. No version."],
+      ["Browser family", "A name only: “Chrome”, “Safari”. No version."],
+      ["Operating system family", "A name only: “Windows”, “iOS”. No version."],
     ],
   },
   {
@@ -64,9 +64,9 @@ const COLLECTED = [
     group: "Event",
     purpose: "Knowing which links and buttons get used.",
     fields: [
-      ["Event type", "From a fixed list — outbound click, CTA press, project view, and similar."],
+      ["Event type", "From a fixed list: outbound click, CTA press, project view, and similar."],
       ["Page path", "Where on this site the interaction happened."],
-      ["Small metadata object", "For an outbound click, only the destination hostname — never the full URL."],
+      ["Small metadata object", "For an outbound click, only the destination hostname, never the full URL."],
     ],
   },
 ];
@@ -76,7 +76,7 @@ const NOT_COLLECTED = [
   "Your IP address. It is never written to the database. It is used transiently, in memory, only for rate limiting.",
   "Your full User-Agent string. It is classified into three coarse families at the moment of arrival and then discarded.",
   "Any device fingerprint. No canvas, WebGL, audio, font enumeration, hardware probing, or screen measurement.",
-  "Your name, email address, or any other identifying information — the site never asks for it.",
+  "Your name, email address, or any other identifying information. The site never asks for it.",
   "Any cookie other than the two this site sets itself. Other cookies are never read.",
   "Anything from a third-party tracker, because there is not one. No Google Analytics, no tag manager, no external script, no external network request of any kind.",
   "Precise location. There is no geolocation lookup, at any resolution.",
@@ -88,7 +88,7 @@ const COOKIES = [
     purpose: "Counts visits. Holds a random identifier and nothing else.",
     settings: [
       ["HttpOnly", "JavaScript on the page cannot read it, so a script injection could not steal it."],
-      ["SameSite=Lax", "Sent when you navigate here from another site, so arrivals are attributed correctly — but not on cross-site subrequests."],
+      ["SameSite=Lax", "Sent when you navigate here from another site, so arrivals are attributed correctly, but not on cross-site subrequests."],
       ["Secure", "In production only: never transmitted over unencrypted HTTP."],
       ["365 days", "Long enough for returning-visitor analysis to be meaningful."],
     ],
@@ -98,7 +98,7 @@ const COOKIES = [
     purpose: "Only ever set for the site owner, after signing in to the private analytics console. A normal visitor never receives it.",
     settings: [
       ["HttpOnly", "Unreadable by JavaScript."],
-      ["SameSite=Strict", "Never sent on any cross-site request at all — a CSRF control."],
+      ["SameSite=Strict", "Never sent on any cross-site request at all, which is a CSRF control."],
       ["Secure", "In production only."],
       ["8 hours, rolling", "Expires on inactivity; the session is stored server-side and destroyed on sign-out."],
     ],
@@ -122,15 +122,15 @@ const COMMITMENTS = [
 
 /** How the Australian Privacy Principles are applied here, principle by principle. */
 const APP_ALIGNMENT = [
-  ["APP 1 — Open and transparent management", "This page is the policy. It lists every stored field, every cookie and every setting, and names the purposes the data is put to."],
-  ["APP 3 — Collection of solicited personal information", "Only what is needed to count visits and see which pages are read. No name, email, address, phone number or account is collected, because the site never asks for one."],
-  ["APP 5 — Notification of collection", "This page is linked from the footer of every page on the site, and a notice appears on a first visit."],
-  ["APP 6 — Use and disclosure", "Used only for the two purposes above. Disclosed to nobody. The only exceptions are the two infrastructure matters named in the limits section below."],
-  ["APP 7 — Direct marketing", "Not applicable. The site does no direct marketing and holds no contact details to do it with."],
-  ["APP 8 — Cross-border disclosure", "The site is hosted on infrastructure operated by an overseas provider. See the limits section for what that means in practice."],
-  ["APP 11 — Security of personal information", "Parameterised SQL throughout, a strict Content Security Policy, bcrypt password hashing, rate limiting and account lockout on the console, and HttpOnly cookies. The Cyber Lab write-ups on this site document these controls in detail."],
-  ["APP 11.2 — Destruction or de-identification", "The 400-day retention window is enforced by a scheduled prune job, which deletes expired visitor records and cascades to their sessions, page views and events."],
-  ["APP 12 & 13 — Access and correction", "You can request access to, or correction of, anything held against your identifier. See the note on what that involves in practice."],
+  ["APP 1: Open and transparent management", "This page is the policy. It lists every stored field, every cookie and every setting, and names the purposes the data is put to."],
+  ["APP 3: Collection of solicited personal information", "Only what is needed to count visits and see which pages are read. No name, email, address, phone number or account is collected, because the site never asks for one."],
+  ["APP 5: Notification of collection", "This page is linked from the footer of every page on the site, and a notice appears on a first visit."],
+  ["APP 6: Use and disclosure", "Used only for the two purposes above. Disclosed to nobody. The only exceptions are the two infrastructure matters named in the limits section below."],
+  ["APP 7: Direct marketing", "Not applicable. The site does no direct marketing and holds no contact details to do it with."],
+  ["APP 8: Cross-border disclosure", "The site is hosted on infrastructure operated by an overseas provider. See the limits section for what that means in practice."],
+  ["APP 11: Security of personal information", "Parameterised SQL throughout, a strict Content Security Policy, bcrypt password hashing, rate limiting and account lockout on the console, and HttpOnly cookies."],
+  ["APP 11.2: Destruction or de-identification", "The 400-day retention window is enforced by a scheduled prune job, which deletes expired visitor records and cascades to their sessions, page views and events."],
+  ["APP 12 & 13: Access and correction", "You can request access to, or correction of, anything held against your identifier. See the note on what that involves in practice."],
 ];
 
 function OptOut() {
@@ -148,7 +148,7 @@ function OptOut() {
         <h3 className="title-s">Opt out</h3>
         <p className="muted">
           This clears your identifier from your browser and stops any further recording. Your next
-          visit cannot be linked to this one. There is no dark pattern here — one button, and it
+          visit cannot be linked to this one. There is no dark pattern here. One button, and it
           works.
         </p>
       </div>
@@ -380,7 +380,7 @@ export default function Privacy() {
                 <p>
                   Analytics records are deleted after 400 days. This is enforced by a scheduled job
                   that deletes expired visitor records, which cascades to their sessions, page
-                  views and events — not merely stated as an intention.
+                  views and events, not merely stated as an intention.
                 </p>
                 <p>
                   Sign-in attempts to the private console are recorded for security auditing. Those
@@ -397,7 +397,7 @@ export default function Privacy() {
               <h2 className="title-l">Do Not Track and Global Privacy Control</h2>
               <p className="prose">
                 Both are honoured. If your browser sends either signal, the tracking client stops
-                before making any request — nothing is recorded at all. Most commercial analytics
+                before making any request, so nothing is recorded at all. Most commercial analytics
                 ignores these signals; honouring them costs one condition in the code.
               </p>
             </Reveal>

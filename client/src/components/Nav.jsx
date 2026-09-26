@@ -18,7 +18,7 @@ import { EASE } from "../lib/motion.js";
 
 function Logo() {
   return (
-    <Link to="/" className="nav__logo" aria-label={`${site.name} — home`}>
+    <Link to="/" className="nav__logo" aria-label={`${site.name}, home`}>
       <span className="nav__logo-mark" aria-hidden="true" />
       <span className="nav__logo-text">
         <span className="nav__logo-first">{site.firstName}</span>
