@@ -380,7 +380,38 @@ Detection then came from Sysmon Event ID 3, which records network connections at
       ],
     },
 
-    screenshots: [],
+    /*
+     * Extracted from Screenshots.pdf in the project's own repository. The lab
+     * IPs are host-only RFC1918 addresses and the hostname is a throwaway VM,
+     * so nothing here is sensitive; it is the same evidence the repo publishes,
+     * shown where a reader will actually look at it.
+     */
+    screenshots: [
+      {
+        src: "/projects/sysmon-lab-scan-and-detection.png",
+        alt: "Two VirtualBox windows side by side. On the right, Kali Linux runs an Nmap TCP connect scan against 192.168.56.103 on ports 80, 135, 445 and 3389. On the left, the Windows 10 target's Event Viewer shows a matching Sysmon Event ID 3 network connection record.",
+        caption:
+          "The whole exercise in one frame: the scan on the attacker, and the endpoint telemetry it produced on the target.",
+        wide: true,
+      },
+      {
+        src: "/projects/sysmon-event3-detail-pair.png",
+        alt: "Two Sysmon Event ID 3 detail panes open together, one recording a connection to port 445 and the other to port 135, both from source 192.168.56.102, beside the Nmap output that caused them.",
+        caption:
+          "Two events from one source, seconds apart, on different ports. One of these is unremarkable; the pair is the detection.",
+        wide: true,
+      },
+      {
+        src: "/projects/sysmon-event3-details.png",
+        alt: "A single Sysmon Event ID 3 record in Event Viewer, showing SourceIp 192.168.56.102, DestinationIp 192.168.56.103, DestinationPort 135 and DestinationPortName epmap.",
+        caption: "One connection event, with the fields the detection is built from.",
+      },
+      {
+        src: "/projects/sysmon-event-viewer-list.png",
+        alt: "The Sysmon Operational log in Event Viewer listing many Event ID 3 network connection records logged within minutes of each other.",
+        caption: "The Sysmon Operational log during the scan, where the volume of Event ID 3 records is the first thing that stands out.",
+      },
+    ],
 
     links: {
       github: "https://github.com/SahilZ1/Detection-of-Reconnaissance-Using-Sysmon",

@@ -161,7 +161,12 @@ export default function ProjectDetail() {
       render: () => (
         <div className="grid grid--wide case__shots">
           {project.screenshots.map((shot) => (
-            <figure key={shot.src} className="case__shot">
+            <figure
+              key={shot.src}
+              /* A panorama squeezed into one column of a two-column grid is
+                 unreadable, so a shot can ask for the full row. */
+              className={`case__shot ${shot.wide ? "case__shot--wide" : ""}`}
+            >
               {/* loading="lazy" keeps below-the-fold images out of the
                   initial load; explicit dimensions would be better still
                   once real assets exist, to reserve layout space. */}

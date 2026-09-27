@@ -581,6 +581,10 @@
   background: var(--paper-2);
 }
 
+.case__shot--wide { grid-column: 1 / -1; }
+
+.case__shot img { display: block; width: 100%; height: auto; }
+
 .case__shot figcaption {
   padding: var(--space-3) var(--space-4);
   font-size: var(--step--1);
