@@ -220,7 +220,7 @@ The detector holds per-source sliding windows and evaluates three rules against 
   {
     slug: "splunk-soc-lab",
     name: "Splunk SOC Detection Lab",
-    tagline: "A working SIEM lab: Windows telemetry into Splunk, and seven detections built and validated on top of it.",
+    tagline: "A working SIEM lab: Windows telemetry into Splunk, and six detections built and validated on top of it.",
     category: "SOC / Detection Engineering",
     draft: false,
     year: "2026",
@@ -228,14 +228,14 @@ The detector holds per-source sliding windows and evaluates three rules against 
     accent: "threat",
 
     summary:
-      "A hands-on security operations lab built on Splunk Enterprise, Windows Event Logs and Sysmon: seven detections covering credential attacks, suspicious execution and privilege changes, each implemented, alerted on and validated against activity generated in the lab.",
+      "A hands-on security operations lab built on Splunk Enterprise, Windows Event Logs and Sysmon: six saved detections covering credential attacks, suspicious execution, account creation and registry changes, each implemented, alerted on and validated against activity generated in the lab.",
 
     tags: ["Splunk Enterprise", "Sysmon", "Windows Event Logs", "SIEM", "MITRE ATT&CK", "Detection engineering"],
 
     sections: {
       overview: `A security operations lab built to do the day-to-day work of a SOC analyst rather than read about it: ingest Windows telemetry into a SIEM, write detections against it, fire the activity they are meant to catch, and confirm they actually caught it.
 
-Splunk Enterprise is the SIEM, with Windows Event Logs and Sysmon as the telemetry sources. Seven detections were implemented and validated, spanning credential attacks, suspicious process execution, privilege escalation and persistence-adjacent changes.
+Splunk Enterprise is the SIEM, with Windows Event Logs and Sysmon as the telemetry sources. Six detections were implemented and validated, spanning credential attacks, suspicious process execution, account creation and registry changes.
 
 The lab also produced an unplanned piece of SIEM administration experience: log ingestion broke partway through, and restoring it meant rebuilding the inputs configuration by hand.`,
 
@@ -263,15 +263,15 @@ Validating each rule against activity generated on purpose is what turns a searc
       },
 
       capabilities: {
-        description: "The seven detections implemented and validated in the lab.",
+        description:
+          "The six saved detections, named as they appear in Splunk. All are enabled, and the screenshots below show them saved and firing.",
         items: [
-          "Failed login attempts, the baseline credential-attack signal",
-          "Successful login following multiple failed attempts, the pattern that separates a successful brute force from ordinary mistyping",
-          "Suspicious PowerShell execution",
-          "New user account creation",
-          "User added to the Administrators group, which is privilege escalation via group membership",
-          "Registry modifications",
-          "Suspicious rundll32 execution, a common living-off-the-land binary",
+          "Windows Login Activity Detected, covering successful and failed logon events 4624 and 4625, the baseline credential-attack signal",
+          "Successful Login After Multiple Failed Attempts, firing on two or more failures followed by a success, which is the pattern that separates a brute force from ordinary mistyping",
+          "Login Attempt by User, for attempted logins from a given account",
+          "Suspicious Powershell Execution, for abnormal PowerShell commands",
+          "New User Account Created, mapped to MITRE ATT&CK T1136, Create Account",
+          "Registry Modification Detected, for registry changes made through reg.exe, mapped to MITRE ATT&CK T1112",
         ],
       },
 
@@ -289,7 +289,7 @@ Validating each rule against activity generated on purpose is what turns a searc
           "The lab generates activity that detections are meant to catch, including failed logins, privilege changes and suspicious execution, so containment matters.",
         items: [
           "All activity is generated inside a virtualised environment built for the exercise, isolated from any production system.",
-          "Only the detection logic and findings are published. No telemetry, host detail or configuration from the lab is shared.",
+          "Only the detection logic and the results are published. The lab hostname and account visible in the screenshots belong to the virtual machine built for this exercise, and no forwarder configuration or log data leaves it.",
           "Detections were validated by performing the behaviour deliberately, rather than by replaying samples of unknown provenance.",
         ],
       },
@@ -299,7 +299,7 @@ Validating each rule against activity generated on purpose is what turns a searc
       ],
 
       results:
-        "Seven detections implemented, alerted on and validated against activity generated in the lab, across credential attacks, suspicious execution, privilege escalation and registry modification, plus a restored ingestion pipeline after diagnosing and rebuilding the forwarder input configuration.",
+        "Six detections implemented, saved as enabled alerts and validated against activity generated in the lab, across credential attacks, suspicious execution, account creation and registry modification, plus a restored ingestion pipeline after diagnosing and rebuilding the forwarder input configuration.",
 
       lessons: [
         "A detection is not finished when the search returns results. It is finished when you have fired the behaviour on purpose and watched the alert catch it.",
@@ -308,7 +308,27 @@ Validating each rule against activity generated on purpose is what turns a searc
       ],
     },
 
-    screenshots: [],
+    screenshots: [
+      {
+        src: "/projects/splunk-saved-detections.jpg",
+        alt: "The Searches, Reports and Alerts page in Splunk listing six saved alerts, all enabled: Login Attempt by User, New User Account Created, Registry Modification Detected, Successful Login After Multiple Failed Attempts, Suspicious Powershell Execution and Windows Login Activity Detected, each with a description and a count of alerts fired.",
+        caption:
+          "The six saved detections, enabled, with their descriptions and MITRE ATT&CK mappings and the number of alerts each has fired.",
+        wide: true,
+      },
+      {
+        src: "/projects/splunk-failed-logon-search.jpg",
+        alt: "A Splunk search for EventCode 4625 with the failure reason An Error occured during Logon, returning 57 events tabulated by time, event code, account name, host and logon type.",
+        caption:
+          "The failed-logon search behind the credential-attack detection, returning 57 events across the lab period.",
+      },
+      {
+        src: "/projects/splunk-triggered-alerts.jpg",
+        alt: "The Triggered Alerts page in Splunk showing nine fired alerts with their severities, including Suspicious Powershell Execution and New User Account Created at high severity and Successful Login After Multiple Failed Attempts at high severity.",
+        caption:
+          "Alerts actually firing. A saved search only becomes a detection once the behaviour it targets sets it off.",
+      },
+    ],
 
     links: {
       github: null,

@@ -201,7 +201,7 @@ export const evidencedSkills = [
     items: [
       { name: "Network intrusion detection", evidence: "NIDS: sliding-window port-scan, traffic-spike and high-risk-port rules in Python and Scapy" },
       { name: "Packet capture & traffic analysis", evidence: "NIDS: live interface capture and offline PCAP analysis, verified alongside Wireshark" },
-      { name: "SIEM engineering", evidence: "Splunk SOC lab: seven detections built over Windows Event Logs and Sysmon" },
+      { name: "SIEM engineering", evidence: "Splunk SOC lab: six detections built over Windows Event Logs and Sysmon" },
       { name: "Endpoint detection & telemetry", evidence: "Sysmon Event ID 3 used to reconstruct an Nmap port scan end to end" },
       { name: "Alert tuning & validation", evidence: "Detections fired deliberately to confirm them; per-source cooldown suppresses duplicate alerts" },
       { name: "MITRE ATT&CK mapping", evidence: "Reconnaissance activity mapped to T1046, Network Service Discovery" },
