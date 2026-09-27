@@ -164,13 +164,17 @@ export const achievements = [
     date: "2026",
     detail:
       "Recognised by AIIDA for my contribution to the team during the cyber security internship.",
+    image: "/achievements/best-team-player.jpg",
+    imageAlt: "Sahil Zagade being presented with the Best Team Player of the Month plaque in the AIIDA office.",
   },
   {
     title: "Hack The Box Cyber Apocalypse CTF 2026",
     issuer: "Hack The Box",
     date: "2026",
     detail:
-      "Finished 698th of 6,744 teams, in the top 10% globally, solving 58 challenges as a pair.",
+      "Finished 698th of 6,744 teams, solving 58 of the 136 challenges for 20,825 points, competing as a pair.",
+    image: "/achievements/htb-cyber-apocalypse-2026.jpg",
+    imageAlt: "Hack The Box certificate of participation for Cyber Apocalypse CTF 2026, showing team ranking 698th, 58 of 136 challenges solved, 20,825 total points, and 6,744 total teams.",
   },
 ];
 

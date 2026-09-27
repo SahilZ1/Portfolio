@@ -49,6 +49,15 @@ export default function About() {
           <RevealGroup className="grid grid--cards achievements__grid" gap={0.08}>
             {achievements.map((achievement) => (
               <RevealItem key={achievement.title} className="card achievement">
+                {achievement.image && (
+                  <img
+                    className="achievement__image"
+                    src={achievement.image}
+                    alt={achievement.imageAlt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
                 <div className="achievement__head">
                   <h3 className="title-s achievement__title">{achievement.title}</h3>
                   <span className="tag">{achievement.date}</span>

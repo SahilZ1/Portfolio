@@ -1399,6 +1399,20 @@ a.contact__value { border-bottom: 2px solid var(--brand); align-self: flex-start
   flex-direction: column;
 }
 
+/* The image bleeds to the card edges, so it cancels the card's own padding and
+   takes the top corners with it. A fixed ratio keeps the row level when one
+   recognition is a portrait photo and the other a landscape certificate. */
+.achievement__image {
+  display: block;
+  width: calc(100% + var(--space-5) * 2);
+  margin: calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-5);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+  background: var(--paper-2);
+}
+
 .achievement__head {
   display: flex;
   align-items: baseline;
