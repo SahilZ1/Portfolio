@@ -38,8 +38,21 @@ export default function Experience() {
                 </div>
 
                 <div className="timeline__body">
-                  <h2 className="title-m timeline__role"><Text value={role.role} /></h2>
-                  <p className="timeline__org brand-text"><Text value={role.organisation} /></p>
+                  <div className="timeline__heading">
+                    {/* The organisation is named in text right beside it, so the
+                        mark is decorative and carries no alt text. */}
+                    <span className="timeline__logo">
+                      {role.logo ? (
+                        <img src={role.logo} alt="" loading="lazy" decoding="async" />
+                      ) : (
+                        <span className="timeline__logo-blank" aria-hidden="true" />
+                      )}
+                    </span>
+                    <span className="timeline__heading-text">
+                      <h2 className="title-m timeline__role"><Text value={role.role} /></h2>
+                      <p className="timeline__org brand-text"><Text value={role.organisation} /></p>
+                    </span>
+                  </div>
                   <p className="timeline__summary muted"><Text value={role.summary} /></p>
 
                   <TextList items={role.highlights} className="timeline__highlights" />

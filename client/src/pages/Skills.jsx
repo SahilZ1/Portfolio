@@ -98,7 +98,11 @@ export default function Skills() {
               .filter((certification) => certification.status === "Held")
               .map((certification) => (
                 <RevealItem key={certification.name} className="card certs-strip__item">
-                  <span className="certs-strip__badge" aria-hidden="true" />
+                  {certification.logo ? (
+                    <img className="certs-strip__logo" src={certification.logo} alt="" loading="lazy" />
+                  ) : (
+                    <span className="certs-strip__badge" aria-hidden="true" />
+                  )}
                   <h3 className="title-s certs-strip__name">{certification.name}</h3>
                   <p className="muted certs-strip__issuer">{certification.issuer}</p>
                 </RevealItem>

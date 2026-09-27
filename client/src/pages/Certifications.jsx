@@ -24,7 +24,11 @@ export default function Certifications() {
           <RevealGroup className="grid grid--cards" gap={0.07}>
             {certifications.map((certification, index) => (
               <RevealItem key={index} className="card cert-card">
-                <div className="cert-card__badge" aria-hidden="true" />
+                {certification.logo ? (
+                  <img className="cert-card__logo" src={certification.logo} alt="" loading="lazy" />
+                ) : (
+                  <div className="cert-card__badge" aria-hidden="true" />
+                )}
                 <h2 className="title-s">
                   <Text value={certification.name} />
                 </h2>

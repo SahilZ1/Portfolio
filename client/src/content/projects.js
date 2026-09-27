@@ -189,7 +189,27 @@ The detector holds per-source sliding windows and evaluates three rules against 
         "The system runs against a live interface or a saved capture and produces severity-tagged alerts for the three rule types, stored in SQLite and exportable to CSV. Detection was verified alongside Wireshark on the same traffic.",
     },
 
-    screenshots: [],
+    screenshots: [
+      {
+        src: "/projects/nids-live-capture.png",
+        alt: "VS Code with models.py open showing the NetworkEvent dataclass, and a terminal running the detector live on interface en0. The output is a stream of HIGH and MEDIUM alerts: traffic spikes, possible port scans, and suspicious access to port 445.",
+        caption:
+          "The detector running live, with the three rules firing on real traffic: traffic spike, port scan and high-risk port access.",
+        wide: true,
+      },
+      {
+        src: "/projects/nids-cli-alerts-export.png",
+        alt: "Terminal showing three CLI subcommands in sequence: alerts with a limit of 20, export writing alerts to a CSV file, and live starting a capture on en0.",
+        caption:
+          "The CLI: reading stored alerts and exporting them needs no capture dependency and no root. Only live does.",
+      },
+      {
+        src: "/projects/nids-alerts-csv.png",
+        alt: "The exported alerts.csv open in the editor, with columns for timestamp, alert type, severity, source IP, destination IP and details.",
+        caption:
+          "The CSV export. Alerts persist, packets do not: the payload is never written to disk.",
+      },
+    ],
 
     links: {
       github: "https://github.com/SahilZ1/Network-Intrusion-Detection-System-NIDS-",

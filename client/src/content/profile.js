@@ -58,6 +58,7 @@ export const experience = [
   {
     role: "Cyber Security Analyst Intern",
     organisation: "AIIDA",
+    logo: "/logos/aiida.png",
     period: "Apr 2026 – present",
     location: "New South Wales, on-site",
     summary:
@@ -84,6 +85,7 @@ export const experience = [
   {
     role: "Cyber Security Analyst (self-directed projects)",
     organisation: "Self-employed",
+    logo: "/logos/self-directed.png",
     period: "Apr 2024 – May 2026",
     location: "New South Wales",
     summary:
@@ -100,6 +102,7 @@ export const experience = [
   {
     role: "Medical Secretary",
     organisation: "NSW Government",
+    logo: "/logos/nsw-government.png",
     period: "Feb 2025 – Apr 2026",
     location: "New South Wales, on-site",
     summary:
@@ -120,6 +123,7 @@ export const experience = [
   {
     role: "Safety Coordinator, Amazon site",
     organisation: "Adecco",
+    logo: "/logos/adecco.png",
     period: "Sep 2024 – Feb 2025",
     location: "New South Wales, on-site",
     summary:
@@ -294,12 +298,14 @@ export const certifications = [
   {
     name: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
+    logo: "/logos/aws-cloud-practitioner.png",
     date: "April 2026",
     status: "Held",
   },
   {
     name: "Microsoft Certified: Security, Compliance, and Identity Fundamentals (SC-900)",
     issuer: "Microsoft",
+    logo: "/logos/microsoft.svg",
     status: "Held",
   },
   {
