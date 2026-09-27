@@ -51,7 +51,7 @@ export default function About() {
               <RevealItem key={achievement.title} className="card achievement">
                 {achievement.image && (
                   <img
-                    className="achievement__image"
+                    className={`achievement__image achievement__image--${achievement.imageFit ?? "cover"}`}
                     src={achievement.image}
                     alt={achievement.imageAlt}
                     loading="lazy"

@@ -1449,24 +1449,31 @@ a.contact__value { border-bottom: 2px solid var(--brand); align-self: flex-start
 }
 
 /* The image bleeds to the card edges, so it cancels the card's own padding and
-   takes the top corners with it. A fixed ratio keeps the row level when one
-   recognition is a portrait photo and the other a landscape certificate.
-
-   `contain`, not `cover`: these are evidence. Cropping a certificate cuts the
-   badge strip off its right edge and the band off its bottom, and cropping the
-   photo cuts the people in it. The image is matted against the frame instead,
-   which costs some space on the portrait and shows both in full. */
+   takes the top corners with it. The frame is a fixed 4:3 on both cards so the
+   row stays level; how each image sits inside it is set per recognition,
+   because a portrait photo and a landscape certificate do not want the same
+   treatment. */
 .achievement__image {
   display: block;
   width: calc(100% + var(--space-5) * 2);
   margin: calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-5);
-  padding: var(--space-3);
   aspect-ratio: 4 / 3;
-  object-fit: contain;
   object-position: center;
   border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
   border-bottom: 1px solid var(--line);
   background: var(--paper-3);
+}
+
+/* Fills the frame edge to edge. For the certificate, whose own ratio is within
+   a few percent of the frame's, this costs a sliver of border and nothing
+   readable. */
+.achievement__image--cover { object-fit: cover; }
+
+/* Whole image, centred, matted. For the photo, where filling the frame would
+   mean cropping the people in it. */
+.achievement__image--contain {
+  object-fit: contain;
+  padding: var(--space-3);
 }
 
 .achievement__head {
