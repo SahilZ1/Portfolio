@@ -1446,31 +1446,40 @@ a.contact__value { border-bottom: 2px solid var(--brand); align-self: flex-start
   height: 100%;
   display: flex;
   flex-direction: column;
+  /* No padding on the card itself: the image spans it edge to edge and
+     `.achievement__body` puts the inset back on the text. The earlier version
+     stretched the image over the padding with a negative margin and a calc
+     width, which the global `img { max-width: 100% }` quietly clamped, leaving
+     the frame a padding short on the right and the photo off-centre. */
+  padding: 0;
+  overflow: hidden;
 }
 
-/* The image bleeds to the card edges, so it cancels the card's own padding and
-   takes the top corners with it. The frame is a fixed 4:3 on both cards so the
-   row stays level; how each image sits inside it is set per recognition,
-   because a portrait photo and a landscape certificate do not want the same
-   treatment. */
+.achievement__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-5);
+}
+
+/* The frame is a fixed 4:3 on both cards so the row stays level. How each
+   image sits inside it is set per recognition, because a portrait photo and a
+   landscape certificate do not want the same treatment. */
 .achievement__image {
-  display: block;
-  width: calc(100% + var(--space-5) * 2);
-  margin: calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-5);
+  width: 100%;
   aspect-ratio: 4 / 3;
   object-position: center;
-  border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
   border-bottom: 1px solid var(--line);
   background: var(--paper-3);
 }
 
-/* Fills the frame edge to edge. For the certificate, whose own ratio is within
-   a few percent of the frame's, this costs a sliver of border and nothing
+/* Fills the frame edge to edge. The certificate's own ratio is within a few
+   percent of the frame's, so this costs a sliver of border and nothing
    readable. */
 .achievement__image--cover { object-fit: cover; }
 
-/* Whole image, centred, matted. For the photo, where filling the frame would
-   mean cropping the people in it. */
+/* Whole image, centred in the frame, matted. For the photo, where filling the
+   frame would mean cropping the people in it. */
 .achievement__image--contain {
   object-fit: contain;
   padding: var(--space-3);

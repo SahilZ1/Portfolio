@@ -58,12 +58,14 @@ export default function About() {
                     decoding="async"
                   />
                 )}
-                <div className="achievement__head">
-                  <h3 className="title-s achievement__title">{achievement.title}</h3>
-                  <span className="tag">{achievement.date}</span>
+                <div className="achievement__body">
+                  <div className="achievement__head">
+                    <h3 className="title-s achievement__title">{achievement.title}</h3>
+                    <span className="tag">{achievement.date}</span>
+                  </div>
+                  <p className="achievement__issuer brand-text">{achievement.issuer}</p>
+                  <p className="muted achievement__detail">{achievement.detail}</p>
                 </div>
-                <p className="achievement__issuer brand-text">{achievement.issuer}</p>
-                <p className="muted achievement__detail">{achievement.detail}</p>
               </RevealItem>
             ))}
           </RevealGroup>
