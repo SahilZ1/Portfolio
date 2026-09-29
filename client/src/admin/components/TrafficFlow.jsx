@@ -30,6 +30,9 @@ const NODE_WIDTH = 13;
 const COLUMN_GAP = 300;
 const NODE_GAP = 10;
 const MIN_NODE_HEIGHT = 16;
+/** Room above the columns for their headers, and a little air beneath. */
+const TOP_PAD = 28;
+const BOTTOM_PAD = 12;
 
 /** Shorten a page path for display without losing the meaningful tail. */
 function shortPath(path) {
@@ -128,6 +131,23 @@ export function TrafficFlow({ flows, sourceLabels = {} }) {
     const columnTwo = layoutColumn(entryPages, COLUMN_GAP + NODE_WIDTH, height, entryTotal);
     const columnThree = layoutColumn(nextPages, (COLUMN_GAP + NODE_WIDTH) * 2, height, nextTotal);
 
+    /*
+     * `layoutColumn` floors every node at MIN_NODE_HEIGHT, so a column holding
+     * several low-volume pages lays out taller than the height it was handed.
+     * Measure what the layout actually produced rather than trusting the
+     * request: sizing the viewBox from the nominal height left the last node
+     * of the busiest column outside it, and the parent's `overflow-x: auto`
+     * turns overflow-y into a clip, so it was cut off rather than spilling.
+     */
+    const columnExtent = (column) =>
+      column.length ? column[column.length - 1].y + column[column.length - 1].height : 0;
+    const contentHeight = Math.max(
+      height,
+      columnExtent(columnOne),
+      columnExtent(columnTwo),
+      columnExtent(columnThree)
+    );
+
     const byId = new Map([...columnOne, ...columnTwo, ...columnThree].map((n) => [n.id, n]));
 
     /** Build ribbons for one stage, stacking them within each node's height. */
@@ -181,7 +201,7 @@ export function TrafficFlow({ flows, sourceLabels = {} }) {
     );
 
     return {
-      height,
+      height: contentHeight,
       nodes: [...columnOne, ...columnTwo, ...columnThree],
       links: [...stageOne, ...stageTwo],
       columns: [
@@ -217,7 +237,7 @@ export function TrafficFlow({ flows, sourceLabels = {} }) {
   return (
     <figure className="flowviz">
       <svg
-        viewBox={`0 0 ${WIDTH} ${model.height + 34}`}
+        viewBox={`0 0 ${WIDTH} ${model.height + TOP_PAD + BOTTOM_PAD}`}
         className="flowviz__svg"
         role="img"
         aria-label="Visitor journey: traffic source to entry page to next page, with ribbon thickness proportional to session count."
@@ -242,7 +262,7 @@ export function TrafficFlow({ flows, sourceLabels = {} }) {
           )}
         </defs>
 
-        <g transform="translate(0, 28)">
+        <g transform={`translate(0, ${TOP_PAD})`}>
           {/* Ribbons first, so nodes sit on top of them. */}
           <g className="flowviz__links">
             {model.links.map((link) => (
