@@ -86,6 +86,23 @@ function regenerateSession(req) {
   });
 }
 
+/**
+ * Flush the session to the store before responding.
+ *
+ * express-session otherwise writes the row from a hook on `res.end`, which is
+ * fire-and-forget. A long-lived server finishes that write regardless, but a
+ * serverless function can be frozen or torn down the instant the response is
+ * flushed, leaving the browser holding a cookie for a session row that was
+ * never committed. Every subsequent request then looks unauthenticated, which
+ * reads to the user as being signed straight back out after logging in.
+ */
+function saveSession(req) {
+  return new Promise((resolve, reject) => {
+    if (!req.session) return resolve();
+    req.session.save((error) => (error ? reject(error) : resolve()));
+  });
+}
+
 /** Destroy the session server-side and clear the cookie. */
 function destroySession(req, res, cookieName) {
   return new Promise((resolve) => {
@@ -98,4 +115,11 @@ function destroySession(req, res, cookieName) {
   });
 }
 
-module.exports = { requireAdmin, requireCsrfToken, issueCsrfToken, regenerateSession, destroySession };
+module.exports = {
+  requireAdmin,
+  requireCsrfToken,
+  issueCsrfToken,
+  regenerateSession,
+  saveSession,
+  destroySession,
+};

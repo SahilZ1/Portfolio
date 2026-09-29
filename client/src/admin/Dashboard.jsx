@@ -133,14 +133,16 @@ export function Dashboard({ user, onSignOut }) {
       DASHBOARD_SECTIONS.map(([, call]) => call(windowDays))
     );
 
-    // An expired session fails every panel at once, so any 401 means the
-    // session is gone rather than one endpoint being unwell.
-    const expired = settled.some(
-      (result) =>
-        result.status === "rejected" &&
-        result.reason instanceof ApiError &&
-        result.reason.status === 401
-    );
+    /*
+     * Sign out only when the session is unambiguously gone: every section
+     * failed, and every one of them with a 401. Treating a single 401 as an
+     * expiry threw the user back to the login screen whenever one request lost
+     * a race, which is indistinguishable from the login itself failing.
+     */
+    const rejections = settled.filter((result) => result.status === "rejected");
+    const expired =
+      rejections.length === settled.length &&
+      rejections.every((r) => r.reason instanceof ApiError && r.reason.status === 401);
     if (expired) {
       setLoading(false);
       onSignOut();

@@ -15,6 +15,7 @@ const {
   requireCsrfToken,
   issueCsrfToken,
   regenerateSession,
+  saveSession,
   destroySession,
 } = require("../middleware/requireAdmin");
 const { config } = require("../config");
@@ -34,10 +35,16 @@ router.get(
     if (!req.session?.admin?.id) {
       return res.json({ authenticated: false, setupRequired: !(await adminAccountExists()) });
     }
+    // issueCsrfToken mints and stores a token on first call, so this response
+    // can mutate the session. Commit it for the same reason login does: an
+    // unwritten token would be rejected on the next state-changing request.
+    const csrfToken = issueCsrfToken(req);
+    await saveSession(req);
+
     res.json({
       authenticated: true,
       user: { username: req.session.admin.username },
-      csrfToken: issueCsrfToken(req),
+      csrfToken,
       expiresInMs: config.session.ttlMs,
     });
   })
@@ -76,6 +83,11 @@ router.post(
     // moment privileges change.
     await regenerateSession(req);
     req.session.admin = { id: result.user.id, username: result.user.username, at: Date.now() };
+
+    // Commit the session before responding. The platform may freeze this
+    // function as soon as the response is flushed, and an unwritten session
+    // row means the cookie we are about to set authenticates nothing.
+    await saveSession(req);
 
     logger.info("Administrator signed in", { username: result.user.username });
 
