@@ -91,6 +91,24 @@ function Panel({ title, subtitle, loading, children, wide = false, action }) {
   );
 }
 
+/**
+ * The panels the console loads, as [state key, fetcher] pairs.
+ *
+ * Kept in one ordered list so a result can always be matched back to the panel
+ * that asked for it, and so a failing section can be named in the UI.
+ */
+const DASHBOARD_SECTIONS = [
+  ["overview", (days) => api.analytics.overview(days)],
+  ["traffic", (days) => api.analytics.traffic(days)],
+  ["pages", (days) => api.analytics.pages(days, 8)],
+  ["sources", (days) => api.analytics.sources(days, 8)],
+  ["devices", (days) => api.analytics.devices(days)],
+  ["flows", (days) => api.analytics.flows(days, 14)],
+  ["events", (days) => api.analytics.events(days, 12)],
+  ["activity", () => api.analytics.activity(14)],
+  ["insights", (days) => api.analytics.insights(days)],
+];
+
 export function Dashboard({ user, onSignOut }) {
   const [days, setDays] = useState(30);
   const [data, setData] = useState({});
@@ -101,33 +119,58 @@ export function Dashboard({ user, onSignOut }) {
   const load = useCallback(async (windowDays) => {
     setLoading(true);
     setError(null);
-    try {
-      // Parallel: each endpoint is independent, so the console is as slow as
-      // its slowest query rather than the sum of all of them.
-      const [overview, traffic, pages, sources, devices, flows, events, activity, insights] =
-        await Promise.all([
-          api.analytics.overview(windowDays),
-          api.analytics.traffic(windowDays),
-          api.analytics.pages(windowDays, 8),
-          api.analytics.sources(windowDays, 8),
-          api.analytics.devices(windowDays),
-          api.analytics.flows(windowDays, 14),
-          api.analytics.events(windowDays, 12),
-          api.analytics.activity(14),
-          api.analytics.insights(windowDays),
-        ]);
 
-      setData({ overview, traffic, pages, sources, devices, flows, events, activity, insights });
-    } catch (caught) {
-      if (caught instanceof ApiError && caught.status === 401) {
-        // Session expired while the console was open.
-        onSignOut();
+    /*
+     * Parallel, and settled rather than all-or-nothing. These endpoints are
+     * independent, so the console is as slow as its slowest query rather than
+     * the sum of them. `Promise.all` also made them fail as a group: one
+     * endpoint erroring rejected the batch, no panel received its data, and
+     * every tile fell back to zero behind a banner that said nothing about
+     * which of the nine was actually broken. Settling keeps the eight working
+     * panels populated and names the one that is not.
+     */
+    const settled = await Promise.allSettled(
+      DASHBOARD_SECTIONS.map(([, call]) => call(windowDays))
+    );
+
+    // An expired session fails every panel at once, so any 401 means the
+    // session is gone rather than one endpoint being unwell.
+    const expired = settled.some(
+      (result) =>
+        result.status === "rejected" &&
+        result.reason instanceof ApiError &&
+        result.reason.status === 401
+    );
+    if (expired) {
+      setLoading(false);
+      onSignOut();
+      return;
+    }
+
+    const loaded = {};
+    const failures = [];
+
+    settled.forEach((result, index) => {
+      const [key] = DASHBOARD_SECTIONS[index];
+      if (result.status === "fulfilled") {
+        loaded[key] = result.value;
         return;
       }
-      setError("Could not load analytics. Check the server and try again.");
-    } finally {
-      setLoading(false);
-    }
+      const { reason } = result;
+      const detail = reason instanceof ApiError ? `HTTP ${reason.status}` : "network error";
+      failures.push(`${key} (${detail})`);
+      // The console is the only place this is visible, so leave a trace in
+      // devtools with the whole error attached.
+      console.error(`Analytics section "${key}" failed to load`, reason);
+    });
+
+    setData(loaded);
+    setError(
+      failures.length
+        ? `Could not load: ${failures.join(", ")}. The remaining panels are current.`
+        : null
+    );
+    setLoading(false);
   }, [onSignOut]);
 
   useEffect(() => {
