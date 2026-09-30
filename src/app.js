@@ -1,4 +1,4 @@
-/**
+src/app.js/**
  * Express application factory.
  *
  * Separated from server.js so the app can be constructed and exercised by the
@@ -16,6 +16,7 @@
  */
 
 const path = require("path");
+const config = require("./config");
 const fs = require("fs");
 const express = require("express");
 const helmet = require("helmet");
@@ -148,7 +149,9 @@ function createApp() {
   app.use(cookieParser());
 
   // Issues/reads the anonymous visitor cookie. No database access.
+  if (config.analytics.enabled) {
   app.use(visitorTracker);
+}
 
   /**
    * Administrator sessions, stored in PostgreSQL.
@@ -198,7 +201,9 @@ function createApp() {
   app.use("/api", apiLimiter);
 
   app.use("/api", healthRoutes);
+  if (config.analytics.enabled) {
   app.use("/api/track", trackRoutes);
+}
   app.use("/api/admin/auth", authRoutes);
   app.use("/api/admin/analytics", analyticsRoutes);
   app.use("/", seoRoutes);

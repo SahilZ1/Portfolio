@@ -84,6 +84,7 @@ const config = Object.freeze({
   analytics: Object.freeze({
     visitorCookieName: process.env.VISITOR_COOKIE_NAME || "portfolio_visitor",
     visitorCookieMaxAgeMs: int(process.env.VISITOR_COOKIE_MAX_AGE_MS, 1000 * 60 * 60 * 24 * 365),
+    enabled: bool(process.env.ANALYTICS_ENABLED, false),
     // A session ends after this much inactivity. 30 minutes is the long-standing
     // web-analytics convention, which keeps our numbers comparable to other tools.
     sessionTimeoutMs: int(process.env.ANALYTICS_SESSION_TIMEOUT_MS, 1000 * 60 * 30),

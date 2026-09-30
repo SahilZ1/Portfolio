@@ -27,7 +27,7 @@ const ENDPOINT = "/api/track";
  * Track. DNT is widely ignored by commercial analytics; honouring it costs one
  * condition and is the whole point of building this in-house.
  */
-let disabled = false;
+let disabled = true;
 
 function shouldTrack() {
   if (disabled) return false;
