@@ -23,6 +23,10 @@ export default defineConfig({
       // Guard rail: the suite truncates tables, so it runs against its own
       // database. Override DB_NAME in .env only if you know what you are doing.
       DB_NAME: process.env.TEST_DB_NAME || "portfolio_analytics_test",
+      // Live collection is off by default on the deployed site, which leaves
+      // the ingest routes unmounted. The implementation is still shipped and
+      // still has to be correct, so the suite mounts and exercises it.
+      ANALYTICS_ENABLED: "true",
     },
     include: ["tests/**/*.test.js"],
     setupFiles: ["tests/setup.js"],

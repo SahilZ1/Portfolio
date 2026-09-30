@@ -25,7 +25,7 @@ export default function Privacy() {
       />
 
       <section className="section">
-        <div className="container privacy">
+        <div className="shell privacy">
           <section className="privacy__section">
             <Reveal>
               <h2 className="title-l">Analytics collection is disabled</h2>

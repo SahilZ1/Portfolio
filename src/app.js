@@ -1,4 +1,4 @@
-src/app.js/**
+/**
  * Express application factory.
  *
  * Separated from server.js so the app can be constructed and exercised by the
@@ -16,7 +16,6 @@ src/app.js/**
  */
 
 const path = require("path");
-const config = require("./config");
 const fs = require("fs");
 const express = require("express");
 const helmet = require("helmet");
@@ -148,10 +147,11 @@ function createApp() {
 
   app.use(cookieParser());
 
-  // Issues/reads the anonymous visitor cookie. No database access.
+  // Issues/reads the anonymous visitor cookie. No database access. Skipped
+  // entirely when collection is off, so no identifier is minted at all.
   if (config.analytics.enabled) {
-  app.use(visitorTracker);
-}
+    app.use(visitorTracker);
+  }
 
   /**
    * Administrator sessions, stored in PostgreSQL.
@@ -201,9 +201,11 @@ function createApp() {
   app.use("/api", apiLimiter);
 
   app.use("/api", healthRoutes);
+  // Ingest is only mounted when collection is on; otherwise the endpoints do
+  // not exist rather than accepting and discarding.
   if (config.analytics.enabled) {
-  app.use("/api/track", trackRoutes);
-}
+    app.use("/api/track", trackRoutes);
+  }
   app.use("/api/admin/auth", authRoutes);
   app.use("/api/admin/analytics", analyticsRoutes);
   app.use("/", seoRoutes);

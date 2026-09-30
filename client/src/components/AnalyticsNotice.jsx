@@ -56,6 +56,14 @@ export function AnalyticsNotice() {
   const [optedOut, setOptedOut] = useState(false);
 
   useEffect(() => {
+    /*
+     * Nothing to disclose while collection is off. The notice tells the reader
+     * the site sets a first-party analytics cookie and records their visit;
+     * with tracking disabled that is simply untrue, and it contradicts the
+     * privacy page sitting one click away. A notice that overstates what is
+     * collected is worse than none, particularly here.
+     */
+    if (!analytics.enabled) return undefined;
     if (readDismissed()) return undefined;
     // Delay so it does not compete with the hero entrance for attention.
     const timer = window.setTimeout(() => setVisible(true), 1400);
